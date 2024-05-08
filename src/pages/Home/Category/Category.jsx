@@ -31,7 +31,7 @@ const Category = () => {
     };
 
     return (
-        <section className="container mx-auto px-3 md:px-6 my-12 py-12">
+        <section className="container mx-auto px-3 md:px-6 my-12 py-6">
             <SectionTitle
                 subHeading="From 11:00am to 10:00pm"
                 heading="ORDER ONLINE"

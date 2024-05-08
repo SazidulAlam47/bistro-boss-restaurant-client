@@ -1,4 +1,6 @@
 import Category from "./Category/Category";
+import CustomerCare from "./CustomerCare";
+import PopularMenu from "./PopularMenu/PopularMenu";
 import Slider from "./Slider/Slider";
 
 const Home = () => {
@@ -6,6 +8,8 @@ const Home = () => {
         <div>
             <Slider />
             <Category />
+            <CustomerCare />
+            <PopularMenu />
         </div>
     );
 };
