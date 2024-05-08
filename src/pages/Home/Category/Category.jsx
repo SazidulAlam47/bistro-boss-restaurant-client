@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Category.css";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 const Category = () => {
     const { data: categories } = useQuery({
@@ -30,8 +31,12 @@ const Category = () => {
     };
 
     return (
-        <div className="container mx-auto px-3 md:px-6 my-12">
-            <div className="slider-container">
+        <section className="container mx-auto px-3 md:px-6 my-12 py-12">
+            <SectionTitle
+                subHeading="From 11:00am to 10:00pm"
+                heading="ORDER ONLINE"
+            />
+            <div className="slider-container pt-5">
                 <Slider {...settings}>
                     {categories?.map((category) => (
                         <div key={category._id} className="relative">
@@ -47,7 +52,7 @@ const Category = () => {
                     ))}
                 </Slider>
             </div>
-        </div>
+        </section>
     );
 };
 
