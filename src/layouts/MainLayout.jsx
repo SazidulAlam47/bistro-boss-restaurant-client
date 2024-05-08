@@ -8,8 +8,8 @@ const MainLayout = () => {
             <Header />
             <div className="absolute top-0 right-0 left-0">
                 <Outlet />
+                <Footer />
             </div>
-            <Footer />
         </div>
     );
 };

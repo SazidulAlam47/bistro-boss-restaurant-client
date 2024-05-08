@@ -1,3 +1,4 @@
+import CallToAction from "./CTA/CallToAction";
 import Category from "./Category/Category";
 import CustomerCare from "./CustomerCare";
 import PopularMenu from "./PopularMenu/PopularMenu";
@@ -10,6 +11,7 @@ const Home = () => {
             <Category />
             <CustomerCare />
             <PopularMenu />
+            <CallToAction />
         </div>
     );
 };
