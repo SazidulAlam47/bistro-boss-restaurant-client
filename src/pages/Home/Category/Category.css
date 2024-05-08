@@ -1,0 +1,16 @@
+ul.dots li button::before {
+    font-size: 12px;
+}
+
+ul.dots li:hover button::before {
+    color: #76b8ff;
+
+}
+
+ul.dots li.slick-active button::before {
+    color: #007AFF;
+}
+
+ul.dots li:hover.slick-active button::before {
+    color: #007AFF;
+}

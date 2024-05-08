@@ -1,26 +1,26 @@
 [
     {
         "_id": "1",
-        "img": "/images/slider/01.jpg"
+        "img": "/images/home/slider/01.jpg"
     },
     {
         "_id": "2",
-        "img": "/images/slider/02.jpg"
+        "img": "/images/home/slider/02.jpg"
     },
     {
         "_id": "3",
-        "img": "/images/slider/03.png"
+        "img": "/images/home/slider/03.png"
     },
     {
         "_id": "4",
-        "img": "/images/slider/04.jpg"
+        "img": "/images/home/slider/04.jpg"
     },
     {
         "_id": "5",
-        "img": "/images/slider/05.png"
+        "img": "/images/home/slider/05.png"
     },
     {
         "_id": "6",
-        "img": "/images/slider/06.png"
+        "img": "/images/home/slider/06.png"
     }
 ]

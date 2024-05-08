@@ -16,7 +16,7 @@ const Slider = () => {
     if (isPending) {
         return (
             <div>
-                <img src="/images/slider/01.jpg" alt="slider" />
+                <img src="/images/home/slider/01.jpg" alt="slider" />
             </div>
         );
     }
