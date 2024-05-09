@@ -7,10 +7,7 @@ const PopularMenu = () => {
     return (
         <section className="container mx-auto px-3 md:px-6 space-y-10 py-8">
             <SectionTitle subHeading="Check it out" heading="Popular Menu" />
-            <ShowMenus
-                key="popular-menu"
-                url="http://localhost:5000/menus?category=popular"
-            />
+            <ShowMenus category="popular" />
             <div className="text-center">
                 <Link to="/menu">
                     <BtnWhite>View Full Menu</BtnWhite>

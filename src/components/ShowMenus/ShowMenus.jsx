@@ -4,11 +4,13 @@ import MenuItemSkeleton from "./MenuItemSkeleton";
 import MenuItem from "./MenuItem";
 import axios from "axios";
 
-const ShowMenus = ({ url, key }) => {
+const ShowMenus = ({ category }) => {
     const { data: menus, isPending } = useQuery({
-        queryKey: [key],
+        queryKey: [`${category}-menu`],
         queryFn: async () => {
-            const res = await axios.get(url);
+            const res = await axios.get(
+                `http://localhost:5000/menus?category=${category}`
+            );
             return res.data;
         },
     });
@@ -35,8 +37,7 @@ const ShowMenus = ({ url, key }) => {
 };
 
 ShowMenus.propTypes = {
-    url: PropTypes.string.isRequired,
-    key: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
 };
 
 export default ShowMenus;

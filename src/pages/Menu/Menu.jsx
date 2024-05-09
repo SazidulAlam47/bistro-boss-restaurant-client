@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import ShowMenus from "../../components/ShowMenus/ShowMenus";
+import SectionCover from "../../components/SectionCover/SectionCover";
 
 const Menu = () => {
     return (
@@ -9,8 +10,9 @@ const Menu = () => {
             </Helmet>
 
             <div className="container mx-auto px-3 md:px-6">
-                <ShowMenus key="data" url="http://localhost:5000/menus" />
+                <ShowMenus category="pizza" />
             </div>
+            <SectionCover />
         </div>
     );
 };

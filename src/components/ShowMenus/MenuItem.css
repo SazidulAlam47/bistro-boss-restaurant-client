@@ -1,0 +1,12 @@
+.thumbnail {
+    visibility: hidden;
+    opacity: 0;
+    bottom: 120%;
+    transition: 0.5s;
+}
+
+.menu-img:hover+.thumbnail {
+    bottom: 100%;
+    visibility: visible;
+    opacity: 1;
+}
