@@ -7,7 +7,7 @@ const CustomerCare = () => {
                     alt="Customer Care"
                     className="w-full hidden sm:block"
                 />
-                <div className="sm:absolute sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 bg-slate-100 sm:bg-white px-4 py-12 sm:px-0 sm:py-0 sm:p-6 md:p-7 lg:p-12 text-center w-full sm:w-11/12 md:w-2/3 space-y-2 lg:space-y-4">
+                <div className="sm:absolute sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 bg-slate-100 sm:bg-white px-4 py-12 sm:px-3 sm:py-4  md:p-7 lg:p-12 text-center w-full sm:w-11/12 md:w-2/3 space-y-2 lg:space-y-4">
                     <h3 className="font-cinzel text-2xl lg:text-3xl xl:text-4xl">
                         Customer Care at Bistro Boss
                     </h3>

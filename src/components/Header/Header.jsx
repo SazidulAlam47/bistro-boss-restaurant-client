@@ -108,8 +108,10 @@ const Header = () => {
                             to="/"
                             className="flex flex-col font-cinzel text-xl"
                         >
-                            <span className="font-black">BISTRO BOSS</span>{" "}
-                            <span className="font-medium tracking-widest">
+                            <span className="font-bold sm:font-black">
+                                BISTRO BOSS
+                            </span>{" "}
+                            <span className="font-light sm:font-medium tracking-widest">
                                 Restaurant
                             </span>
                         </Link>
@@ -173,7 +175,8 @@ const Header = () => {
                                     <div className="w-10 rounded-full">
                                         <img
                                             alt="Tailwind CSS Navbar component"
-                                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                                            // src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                                            src="/images/others/profile.png"
                                         />
                                     </div>
                                 </div>

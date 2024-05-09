@@ -5,6 +5,8 @@ import { RouterProvider } from "react-router-dom";
 import router from "./routes/Route.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "react-loading-skeleton/dist/skeleton.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const queryClient = new QueryClient();
 

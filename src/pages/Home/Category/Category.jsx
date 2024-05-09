@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import "./Category.css";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import Skeleton from "react-loading-skeleton";
