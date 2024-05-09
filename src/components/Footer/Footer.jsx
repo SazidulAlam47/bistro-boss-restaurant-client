@@ -22,10 +22,22 @@ const Footer = () => {
                     <div className="max-w-52 space-y-4 text-center">
                         <h3 className="font-medium text-3xl">Follow US</h3>
                         <p>Join us on social media</p>
-                        <div className="flex gap-3 pt-1 justify-center">
-                            <FaFacebookF size={25} />
-                            <FaInstagram size={25} />
-                            <FaXTwitter size={25} />
+                        <div className="flex gap-4 pt-1 justify-center">
+                            <a
+                                href="https://www.facebook.com/bistrockhulna/"
+                                target="_blank"
+                            >
+                                <FaFacebookF size={25} />
+                            </a>
+                            <a
+                                href="https://www.instagram.com/bistrocbali/"
+                                target="_blank"
+                            >
+                                <FaInstagram size={25} />
+                            </a>
+                            <a href="#">
+                                <FaXTwitter size={25} />
+                            </a>
                         </div>
                     </div>
                 </div>
