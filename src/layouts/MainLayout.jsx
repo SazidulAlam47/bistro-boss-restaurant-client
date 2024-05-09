@@ -6,7 +6,7 @@ const MainLayout = () => {
     return (
         <div className="font-inter">
             <Header />
-            <div className="absolute top-0 right-0 left-0">
+            <div className="absolute top-0 right-0 left-0 overflow-hidden">
                 <Outlet />
                 <Footer />
             </div>

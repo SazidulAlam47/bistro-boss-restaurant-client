@@ -5,9 +5,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Category.css";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import Skeleton from "react-loading-skeleton";
 
 const Category = () => {
-    const { data: categories } = useQuery({
+    const { data: categories, isPending } = useQuery({
         queryKey: ["category"],
         queryFn: async () => {
             const res = await axios.get("/data/category.json");
@@ -19,7 +20,7 @@ const Category = () => {
         dots: true,
         infinite: true,
         autoplay: true,
-        autoplaySpeed: 4000,
+        autoplaySpeed: 3500,
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
@@ -28,7 +29,43 @@ const Category = () => {
                 <ul className="dots"> {dots} </ul>
             </div>
         ),
+        responsive: [
+            {
+                breakpoint: 769,
+                settings: {
+                    slidesToShow: 2,
+                },
+            },
+            {
+                breakpoint: 639,
+                settings: {
+                    slidesToShow: 1,
+                },
+            },
+        ],
     };
+
+    if (isPending) {
+        return (
+            <section className="container mx-auto px-3 md:px-6 my-12 py-6">
+                <SectionTitle
+                    subHeading="From 11:00am to 10:00pm"
+                    heading="ORDER ONLINE"
+                />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-5 animate-pulse">
+                    {Array(4)
+                        .fill(null)
+                        .map((_, index) => (
+                            <div key={index}>
+                                <div className="sm:w-11/12 h-24 sm:h-52 lg:h-96 mx-auto">
+                                    <Skeleton className="h-full" />
+                                </div>
+                            </div>
+                        ))}
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="container mx-auto px-3 md:px-6 my-12 py-6">

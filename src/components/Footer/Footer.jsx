@@ -4,9 +4,9 @@ import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
     return (
         <footer className="text-white">
-            <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="bg-[#1F2937] p-20">
-                    <div className="max-w-72 ml-auto text-center space-y-1">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="bg-[#1F2937] p-10 sm:p-20">
+                    <div className="md:max-w-72 ml-auto text-center space-y-1">
                         <h3 className="font-medium text-3xl pb-3">
                             Contact Us
                         </h3>
@@ -18,8 +18,8 @@ const Footer = () => {
                         <p>Sat - Sun: 10:00 - 23:00</p>
                     </div>
                 </div>
-                <div className="bg-[#111827] p-20">
-                    <div className="max-w-52 space-y-4 text-center">
+                <div className="bg-[#111827] p-10 sm:p-20">
+                    <div className="md:max-w-52 space-y-4 text-center">
                         <h3 className="font-medium text-3xl">Follow US</h3>
                         <p>Join us on social media</p>
                         <div className="flex gap-4 pt-1 justify-center">

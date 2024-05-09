@@ -3,6 +3,8 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import axios from "axios";
 import PopularItem from "./PopularItem";
 import { Link } from "react-router-dom";
+import PopularItemSkeleton from "./PopularItemSkeleton";
+import Skeleton from "react-loading-skeleton";
 
 const PopularMenu = () => {
     const { data: popularMenu, isPending } = useQuery({
@@ -19,12 +21,21 @@ const PopularMenu = () => {
 
     if (isPending) {
         return (
-            <div className="container mx-auto px-3 md:px-6">
+            <div className="container mx-auto px-3 md:px-6 space-y-10 py-8">
                 <SectionTitle
                     subHeading="Check it out"
                     heading="Popular Menu"
                 />
-                <div></div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                    {Array(4)
+                        .fill(null)
+                        .map((_, index) => (
+                            <PopularItemSkeleton key={index} />
+                        ))}
+                </div>
+                <div className="text-center">
+                    <Skeleton height={40} width={130} />
+                </div>
             </div>
         );
     }

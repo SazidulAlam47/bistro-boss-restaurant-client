@@ -27,7 +27,7 @@ const Slider = () => {
             swipeable={true}
             autoPlay={true}
             infiniteLoop={true}
-            interval={4000}
+            interval={3500}
         >
             {slider.map((item) => (
                 <div key={item._id}>
