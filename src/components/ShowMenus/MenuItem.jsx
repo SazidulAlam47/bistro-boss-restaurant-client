@@ -11,7 +11,7 @@ const PopularItem = ({ item }) => {
                     className="w-28 h-28 rounded-bl-full rounded-br-full rounded-tr-full hover:rounded-tl-full hover:rounded-tr-none transition-all"
                 />
             </div>
-            <div className="absolute left-32 thumbnail">
+            <div className="absolute left-32 thumbnail shadow-2xl">
                 <img src={item.image} alt={item.name} className="rounded" />
             </div>
             <div className="w-[60%] sm:w-[70%]">
