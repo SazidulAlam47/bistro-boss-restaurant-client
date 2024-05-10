@@ -18,7 +18,7 @@ const Orders = ({ category }) => {
     if (isPending) {
         return (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-4">
-                {Array(3)
+                {Array(6)
                     .fill(null)
                     .map((_, index) => (
                         <OrderSkeleton key={index} />

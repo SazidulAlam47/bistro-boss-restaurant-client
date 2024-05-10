@@ -4,7 +4,7 @@ import MenuSection from "./MenuSection";
 
 const Menu = () => {
     return (
-        <div>
+        <>
             <Helmet>
                 <title>Bistro Boss | Menu</title>
             </Helmet>
@@ -68,7 +68,7 @@ const Menu = () => {
                 selection of the finest ingredients, slow-cooked to perfection,
                 offering warmth and nourishment with every spoonful.
             </MenuSection>
-        </div>
+        </>
     );
 };
 

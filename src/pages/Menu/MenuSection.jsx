@@ -26,7 +26,13 @@ const MenuSection = ({
             <div className="container mx-auto px-3 md:px-6 space-y-12">
                 <ShowMenus category={category} />
                 <div className="text-center">
-                    <Link to="/shop">
+                    <Link
+                        to={
+                            category === "offered"
+                                ? "/shop"
+                                : `/shop/${category}`
+                        }
+                    >
                         <BtnWhite>Order Your Favorite Food</BtnWhite>
                     </Link>
                 </div>
