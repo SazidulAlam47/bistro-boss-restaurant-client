@@ -27,7 +27,7 @@ const MenuSection = ({
                 <ShowMenus category={category} />
                 <div className="text-center">
                     <Link to="/shop">
-                        <BtnWhite>ORDER YOUR FAVORITE FOOD</BtnWhite>
+                        <BtnWhite>Order Your Favorite Food</BtnWhite>
                     </Link>
                 </div>
             </div>
