@@ -5,10 +5,17 @@ import "react-tabs/style/react-tabs.css";
 import Orders from "../../components/Orders/Orders";
 import "./Shop.css";
 import { useParams } from "react-router-dom";
+import capitalize from "../../utils/capitalize";
+import { useState } from "react";
 
 const Shop = () => {
-    const { category } = useParams();
-    console.log(category);
+    const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
+    const { category: selectedCategory } = useParams();
+    const selectedTab = categories.indexOf(selectedCategory);
+    const [tabIndex, setTabIndex] = useState(
+        selectedTab === -1 ? 0 : selectedTab
+    );
+
     return (
         <>
             <Helmet>
@@ -21,30 +28,21 @@ const Shop = () => {
             </section>
 
             <section className="container mx-auto px-3 md:px-6 py-12">
-                <Tabs>
+                <Tabs
+                    defaultIndex={tabIndex}
+                    onSelect={(index) => setTabIndex(index)}
+                >
                     <TabList>
-                        <Tab>Salad</Tab>
-                        <Tab>Pizza</Tab>
-                        <Tab>Soups</Tab>
-                        <Tab>Desserts</Tab>
-                        <Tab>Drinks</Tab>
+                        {categories.map((category) => (
+                            <Tab key={category}>{capitalize(category)}</Tab>
+                        ))}
                     </TabList>
 
-                    <TabPanel>
-                        <Orders category="salad" />
-                    </TabPanel>
-                    <TabPanel>
-                        <Orders category="pizza" />
-                    </TabPanel>
-                    <TabPanel>
-                        <Orders category="soup" />
-                    </TabPanel>
-                    <TabPanel>
-                        <Orders category="dessert" />
-                    </TabPanel>
-                    <TabPanel>
-                        <Orders category="drinks" />
-                    </TabPanel>
+                    {categories.map((category) => (
+                        <TabPanel key={category}>
+                            <Orders category={category} />
+                        </TabPanel>
+                    ))}
                 </Tabs>
             </section>
         </>
