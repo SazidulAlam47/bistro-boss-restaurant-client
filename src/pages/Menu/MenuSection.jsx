@@ -42,16 +42,12 @@ const MenuSection = ({
 };
 
 MenuSection.propTypes = {
-    cover: PropTypes.bool.isRequired,
+    cover: PropTypes.bool,
     heading: PropTypes.string.isRequired,
     img: PropTypes.string,
     children: PropTypes.string,
     category: PropTypes.string.isRequired,
     subHeading: PropTypes.string,
-};
-
-MenuSection.defaultProps = {
-    cover: false,
 };
 
 export default MenuSection;

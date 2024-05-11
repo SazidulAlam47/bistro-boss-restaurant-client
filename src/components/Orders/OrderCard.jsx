@@ -22,7 +22,7 @@ const OrderCard = ({ item }) => {
 };
 
 OrderCard.propTypes = {
-    item: PropTypes.node.isRequired,
+    item: PropTypes.object.isRequired,
 };
 
 export default OrderCard;

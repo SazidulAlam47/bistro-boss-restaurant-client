@@ -32,12 +32,10 @@ const Cover = ({ page, img, heading, children }) => {
 };
 
 Cover.propTypes = {
-    page: PropTypes.bool.isRequired,
+    page: PropTypes.bool,
     img: PropTypes.string.isRequired,
     heading: PropTypes.string.isRequired,
     children: PropTypes.string.isRequired,
 };
-
-Cover.defaultProps = { page: false };
 
 export default Cover;
