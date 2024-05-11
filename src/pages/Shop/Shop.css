@@ -2,7 +2,6 @@ ul.react-tabs__tab-list {
     border: none;
     text-align: center;
     color: rgb(21, 21, 21);
-    font-family: Inter;
     font-size: 24px;
     font-weight: 500;
     line-height: 29px;
@@ -20,4 +19,14 @@ ul.react-tabs__tab-list {
     color: #BB8506;
     text-decoration: underline solid #BB8506 5px;
     text-underline-offset: 8px;
+}
+
+@media (max-width: 640px) {
+    ul.react-tabs__tab-list {
+        font-size: 16px;
+    }
+
+    .react-tabs__tab--selected {
+        text-decoration: underline solid #BB8506 3px;
+    }
 }

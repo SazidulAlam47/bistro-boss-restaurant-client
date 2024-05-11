@@ -106,7 +106,7 @@ const Header = () => {
                         </div>
                         <Link
                             to="/"
-                            className="flex flex-col font-cinzel text-xl"
+                            className="flex flex-col font-cinzel sm:text-xl"
                         >
                             <span className="font-bold sm:font-black">
                                 BISTRO BOSS
