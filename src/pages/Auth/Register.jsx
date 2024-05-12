@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import OtherLogin from "./OtherLogin";
 import { AuthContext } from "../../providers/AuthProvider";
 import formatFirebaseError from "../../utils/formatFirebaseError";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -78,6 +79,9 @@ const Register = () => {
                 backgroundImage: "url(/images/others/authentication.png)",
             }}
         >
+            <Helmet>
+                <title>Bistro Boss | Register</title>
+            </Helmet>
             <div
                 className="container mx-auto px-3 md:px-6"
                 style={{

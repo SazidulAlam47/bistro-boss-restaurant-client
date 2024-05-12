@@ -11,6 +11,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import Swal from "sweetalert2";
 import OtherLogin from "./OtherLogin";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const emailRef = useRef();
@@ -105,6 +106,9 @@ const Login = () => {
                 backgroundImage: "url(/images/others/authentication.png)",
             }}
         >
+            <Helmet>
+                <title>Bistro Boss | Login</title>
+            </Helmet>
             <div
                 className="container mx-auto px-3 md:px-6"
                 style={{
