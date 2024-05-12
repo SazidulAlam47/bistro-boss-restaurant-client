@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Cover from "../../components/Cover/Cover";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import Orders from "../../components/Orders/Orders";
+import Foods from "../../components/Foods/Foods";
 import "./Shop.css";
 import { useParams } from "react-router-dom";
 import capitalize from "../../utils/capitalize";
@@ -40,7 +40,7 @@ const Shop = () => {
 
                     {categories.map((category) => (
                         <TabPanel key={category}>
-                            <Orders category={category} />
+                            <Foods category={category} />
                         </TabPanel>
                     ))}
                 </Tabs>

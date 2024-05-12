@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import "./OrderCard.css";
+import "./FoodCard.css";
 
-const OrderCard = ({ item }) => {
+const FoodCard = ({ item }) => {
     return (
         <div className="bg-[#F3F3F3] flex flex-col text-center relative box-shw">
             <p className="absolute right-4 top-4 bg-[#111827] text-white font-semibold py-3 px-6">
@@ -21,8 +21,8 @@ const OrderCard = ({ item }) => {
     );
 };
 
-OrderCard.propTypes = {
+FoodCard.propTypes = {
     item: PropTypes.object.isRequired,
 };
 
-export default OrderCard;
+export default FoodCard;

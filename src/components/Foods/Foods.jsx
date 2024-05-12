@@ -1,19 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import OrderSkeleton from "./OrderSkeleton";
-import OrderCard from "./OrderCard";
+import FoodSkeleton from "./FoodSkeleton";
+import FoodCard from "./FoodCard";
 import PropTypes from "prop-types";
 import ReactPaginate from "react-paginate";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
-const Orders = ({ category }) => {
+const Foods = ({ category }) => {
     const location = useLocation();
     const productsPerPage = 6;
     const [selectedPage, setSelectedPage] = useState(0);
 
-    const { data: orders, isPending } = useQuery({
-        queryKey: [`${category}-orders-${selectedPage}-${productsPerPage}`],
+    const { data: foods, isPending } = useQuery({
+        queryKey: [`${category}-foods-${selectedPage}-${productsPerPage}`],
         queryFn: async () => {
             const menusRes = await axios.get(
                 `http://localhost:5000/menus?category=${category}&page=${selectedPage}&size=${productsPerPage}`
@@ -33,13 +33,13 @@ const Orders = ({ category }) => {
                 {Array(6)
                     .fill(null)
                     .map((_, index) => (
-                        <OrderSkeleton key={index} />
+                        <FoodSkeleton key={index} />
                     ))}
             </div>
         );
     }
 
-    const totalData = orders.count;
+    const totalData = foods.count;
     const totalPages = Math.ceil(totalData / productsPerPage);
 
     const handlePageChange = (data) => {
@@ -50,8 +50,8 @@ const Orders = ({ category }) => {
     return (
         <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-4">
-                {orders.menus?.map((item) => (
-                    <OrderCard key={item._id} item={item} />
+                {foods.menus?.map((item) => (
+                    <FoodCard key={item._id} item={item} />
                 ))}
             </div>
             {location.pathname !== "/" && (
@@ -75,8 +75,8 @@ const Orders = ({ category }) => {
     );
 };
 
-Orders.propTypes = {
+Foods.propTypes = {
     category: PropTypes.string.isRequired,
 };
 
-export default Orders;
+export default Foods;

@@ -1,4 +1,4 @@
-const OrderSkeleton = () => {
+const FoodSkeleton = () => {
     return (
         <div className="bg-[#F3F3F3] animate-pulse space-y-4 pb-6">
             <div className="my-1 bg-slate-300 dark:bg-slate-700 h-56 w-full "></div>
@@ -13,4 +13,4 @@ const OrderSkeleton = () => {
     );
 };
 
-export default OrderSkeleton;
+export default FoodSkeleton;
