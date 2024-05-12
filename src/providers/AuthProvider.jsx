@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
     };
 
     const updateInfo = (user, profile) => {
-        setLoading(true);
+        Object.assign(user, profile);
         return updateProfile(user, profile);
     };
 

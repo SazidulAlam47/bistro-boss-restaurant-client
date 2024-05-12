@@ -1,7 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Headroom from "react-headroom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -22,6 +23,9 @@ const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef();
+
+    const { user } = useContext(AuthContext);
+
     const navLinks = (
         <>
             <SingleNav
@@ -166,6 +170,7 @@ const Header = () => {
                                     </div>
                                 </div>
                             </div>
+                            {user && <h3>{user.displayName}</h3>}
                             <div className="dropdown dropdown-end">
                                 <div
                                     tabIndex={0}
