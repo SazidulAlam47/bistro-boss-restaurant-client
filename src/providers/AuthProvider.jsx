@@ -13,10 +13,9 @@ import {
     GithubAuthProvider,
     TwitterAuthProvider,
 } from "firebase/auth";
-
 import auth from "../firebase/firebase.config";
-import useDisplayError from "../hooks/useDisplayError";
-import useCheckEmail from "../hooks/useCheckEmail";
+import checkEmail from "../utils/checkEmail";
+import displayError from "../utils/displayError";
 
 export const AuthContext = createContext();
 
@@ -27,8 +26,6 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const displayError = useDisplayError();
-    const checkEmail = useCheckEmail();
 
     const googleLogin = () => {
         setLoading(true);
@@ -106,7 +103,7 @@ const AuthProvider = ({ children }) => {
         return () => {
             unSubscribe();
         };
-    }, [user, displayError, checkEmail]);
+    }, [user]);
 
     const authInfo = {
         user,
@@ -119,7 +116,6 @@ const AuthProvider = ({ children }) => {
         updateInfo,
         logOut,
         passwordReset,
-        displayError,
     };
 
     return (

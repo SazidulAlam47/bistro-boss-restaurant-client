@@ -5,7 +5,7 @@ import Headroom from "react-headroom";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 import defaultImg from "/images/icon/user.svg";
-import useDisplayError from "../../hooks/useDisplayError";
+import displayError from "../../utils/displayError";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -26,7 +26,6 @@ const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef();
-    const displayError = useDisplayError();
 
     const { user, logOut } = useContext(AuthContext);
 

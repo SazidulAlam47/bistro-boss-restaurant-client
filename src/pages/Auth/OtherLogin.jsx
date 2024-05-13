@@ -4,16 +4,14 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { FaXTwitter } from "react-icons/fa6";
 import PropTypes from "prop-types";
-
 import toast from "react-hot-toast";
-import useDisplayError from "../../hooks/useDisplayError";
+import displayError from "../../utils/displayError";
 
 const OtherLogin = ({ location }) => {
     const navigate = useNavigate();
     const { googleLogin, twitterLogin, githubLogin } = useContext(AuthContext);
-    const displayError = useDisplayError();
 
-    const successTost = (result) => {
+    const successTask = (result) => {
         console.log(result.user);
 
         // const email = result.user.email;
@@ -28,7 +26,7 @@ const OtherLogin = ({ location }) => {
     const handleGoogle = () => {
         googleLogin()
             .then((result) => {
-                successTost(result);
+                successTask(result);
             })
             .catch((err) => {
                 displayError(err);
@@ -38,7 +36,7 @@ const OtherLogin = ({ location }) => {
     const handleTwitter = () => {
         twitterLogin()
             .then((result) => {
-                successTost(result);
+                successTask(result);
             })
             .catch((err) => {
                 displayError(err);
@@ -48,7 +46,7 @@ const OtherLogin = ({ location }) => {
     const handleGithub = () => {
         githubLogin()
             .then((result) => {
-                successTost(result);
+                successTask(result);
             })
             .catch((err) => {
                 displayError(err);

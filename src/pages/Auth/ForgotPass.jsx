@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import useDisplayError from "../../hooks/useDisplayError";
 import { AuthContext } from "../../providers/AuthProvider";
-import useCheckEmail from "../../hooks/useCheckEmail";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import checkEmail from "../../utils/checkEmail";
+import displayError from "../../utils/displayError";
 
 const ForgotPass = () => {
     const {
@@ -12,14 +12,11 @@ const ForgotPass = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const displayError = useDisplayError();
 
     const { passwordReset } = useContext(AuthContext);
-    const checkEmail = useCheckEmail();
 
     const handleForgotPass = (data) => {
         const { email } = data;
-
         passwordReset(email)
             .then(() => {
                 checkEmail(email, "to reset your password");

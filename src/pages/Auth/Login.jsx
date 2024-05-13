@@ -11,8 +11,8 @@ import OtherLogin from "./OtherLogin";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import useDisplayError from "../../hooks/useDisplayError";
-import useCheckEmail from "../../hooks/useCheckEmail";
+import displayError from "../../utils/displayError";
+import checkEmail from "../../utils/checkEmail";
 
 const Login = () => {
     const {
@@ -24,8 +24,6 @@ const Login = () => {
     const captchaRef = useRef();
     const navigate = useNavigate();
     const location = useLocation();
-    const displayError = useDisplayError();
-    const checkEmail = useCheckEmail();
     const { signInWithPassword } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const [captchaError, setCaptchaError] = useState("");
@@ -83,7 +81,7 @@ const Login = () => {
                     boxShadow: "4px 4px 10px #00000054",
                 }}
             >
-                <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 px-20 py-14">
+                <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 px-2 sm:px-20 py-14">
                     <div>
                         <img src="/images/others/authentication2.png" alt="" />
                     </div>
@@ -93,7 +91,7 @@ const Login = () => {
                         </h2>
                         <form
                             onSubmit={handleSubmit(handleLogin)}
-                            className="card-body pb-4"
+                            className="card-body pb-4 px-0 xl:px-5"
                         >
                             <div className="form-control">
                                 <label className="label">

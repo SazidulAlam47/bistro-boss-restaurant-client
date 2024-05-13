@@ -5,7 +5,7 @@ import OtherLogin from "./OtherLogin";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import useDisplayError from "../../hooks/useDisplayError";
+import displayError from "../../utils/displayError";
 
 const Register = () => {
     const {
@@ -15,7 +15,6 @@ const Register = () => {
     } = useForm();
 
     const navigate = useNavigate();
-    const displayError = useDisplayError();
     const [showPassword, setShowPassword] = useState(false);
     const { createUser, updateInfo } = useContext(AuthContext);
 
@@ -41,7 +40,6 @@ const Register = () => {
     };
 
     const handleRegister = (data) => {
-        console.log(data);
         const { name, email, password } = data;
         createUser(email, password)
             .then((result) => {
@@ -79,7 +77,7 @@ const Register = () => {
                     boxShadow: "4px 4px 10px #00000054",
                 }}
             >
-                <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 px-20 py-14">
+                <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 px-2 sm:px-20 py-14">
                     <div className="order-1 lg:order-2">
                         <img src="/images/others/authentication2.png" alt="" />
                     </div>
@@ -89,7 +87,7 @@ const Register = () => {
                         </h2>
                         <form
                             onSubmit={handleSubmit(handleRegister)}
-                            className="card-body pb-4"
+                            className="card-body pb-4 px-0 xl:px-5"
                         >
                             <div className="form-control">
                                 <label className="label">
