@@ -3,56 +3,46 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import OtherLogin from "./OtherLogin";
 import { AuthContext } from "../../providers/AuthProvider";
-import formatFirebaseError from "../../utils/formatFirebaseError";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
+import useDisplayError from "../../hooks/useDisplayError";
 
 const Register = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
     const navigate = useNavigate();
-    const [error, setError] = useState("");
+    const displayError = useDisplayError();
     const [showPassword, setShowPassword] = useState(false);
     const { createUser, updateInfo } = useContext(AuthContext);
 
-    const handleRegister = (e) => {
-        e.preventDefault();
-        const form = new FormData(e.currentTarget);
-        const name = form.get("name");
-        const email = form.get("email");
-        const password = form.get("password");
-
-        if (name === "") {
-            setError("Please enter your name");
-            return;
-        } else if (email === "") {
-            setError("Please enter your email address.");
-            return;
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            setError("Invalid email");
-            return;
-        } else if (password === "") {
-            setError("Please fill in the password");
-            return;
+    const handlePasswordValidate = (password) => {
+        if (password === "") {
+            return "Please fill in the password";
         } else if (password.length < 6) {
-            setError("Password must be at least 6 characters long");
-            return;
+            return "Password must be at least 6 characters long";
         } else if (!/[a-z]/.test(password) && !/[A-Z]/.test(password)) {
-            setError("Password must contain at least one letter");
-            return;
+            return "Password must contain at least one letter";
         } else if (!/[a-z]/.test(password)) {
-            setError("Password must contain at least one lowercase letter");
-            return;
+            return "Password must contain at least one lowercase letter";
         } else if (!/[A-Z]/.test(password)) {
-            setError("Password must contain at least one uppercase letter");
-            return;
+            return "Password must contain at least one uppercase letter";
         } else if (!/[0-9]/.test(password)) {
-            setError("Password must contain at least one number");
-            return;
+            return "Password must contain at least one number";
         } else if (
             !/(?=.*[~`!@#$%^&*()--+={}[\]|\\:;"'<>,.?/_₹]).*$/.test(password)
         ) {
-            setError("Password must contain at least one special character");
-            return;
+            return "Password must contain at least one special character";
         }
-        setError(""); // clear the error message
+        return true;
+    };
+
+    const handleRegister = (data) => {
+        console.log(data);
+        const { name, email, password } = data;
         createUser(email, password)
             .then((result) => {
                 const profile = {
@@ -68,7 +58,7 @@ const Register = () => {
                     });
             })
             .catch((err) => {
-                setError(formatFirebaseError(err));
+                displayError(err);
             });
     };
 
@@ -98,7 +88,7 @@ const Register = () => {
                             Register
                         </h2>
                         <form
-                            onSubmit={handleRegister}
+                            onSubmit={handleSubmit(handleRegister)}
                             className="card-body pb-4"
                         >
                             <div className="form-control">
@@ -107,10 +97,19 @@ const Register = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    name="name"
+                                    {...register("name", {
+                                        required: "Please enter your name",
+                                    })}
                                     placeholder="Your full name"
-                                    className="input input-bordered"
+                                    className={`input input-bordered ${
+                                        errors.name && "border-red-600"
+                                    }`}
                                 />
+                                {errors.name && (
+                                    <p className="text-red-600 pt-1">
+                                        {errors.name.message}
+                                    </p>
+                                )}
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -118,10 +117,24 @@ const Register = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    name="email"
+                                    {...register("email", {
+                                        required:
+                                            "Please enter your email address.",
+                                        pattern: {
+                                            value: /\S+@\S+\.\S+/,
+                                            message: "Invalid email",
+                                        },
+                                    })}
                                     placeholder="Your email"
-                                    className="input input-bordered"
+                                    className={`input input-bordered ${
+                                        errors.email && "border-red-600"
+                                    }`}
                                 />
+                                {errors.email && (
+                                    <p className="text-red-600 pt-1">
+                                        {errors.email.message}
+                                    </p>
+                                )}
                             </div>
                             <div className="form-control relative">
                                 <label className="label">
@@ -129,13 +142,17 @@ const Register = () => {
                                 </label>
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    name="password"
+                                    {...register("password", {
+                                        validate: handlePasswordValidate,
+                                    })}
                                     placeholder="Enter your password"
-                                    className="input input-bordered"
+                                    className={`input input-bordered ${
+                                        errors.password && "border-red-600"
+                                    }`}
                                 />
                                 <span
                                     className="cursor-pointer absolute right-4"
-                                    style={{ bottom: "14px" }}
+                                    style={{ top: "50px" }}
                                     onClick={() =>
                                         setShowPassword(!showPassword)
                                     }
@@ -146,14 +163,16 @@ const Register = () => {
                                         <IoEye className="w-5 h-5" />
                                     )}
                                 </span>
+                                {errors.password && (
+                                    <p className="text-red-600 pt-1">
+                                        {errors.password.message}
+                                    </p>
+                                )}
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn bg-[#D1A054] text-white hover:bg-[#d19f54ea]">
                                     Register
                                 </button>
-                                {error && (
-                                    <p className="text-red-600 pt-2">{error}</p>
-                                )}
                             </div>
                         </form>
                         <div className="text-center space-y-2">

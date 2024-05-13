@@ -4,98 +4,65 @@ import {
     LoadCanvasTemplate,
     validateCaptcha,
 } from "react-simple-captcha";
-import formatFirebaseError from "../../utils/formatFirebaseError";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import { AuthContext } from "../../providers/AuthProvider";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import Swal from "sweetalert2";
 import OtherLogin from "./OtherLogin";
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
+import useDisplayError from "../../hooks/useDisplayError";
+import useCheckEmail from "../../hooks/useCheckEmail";
 
 const Login = () => {
-    const emailRef = useRef();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const captchaRef = useRef();
     const navigate = useNavigate();
     const location = useLocation();
-    const { signInWithPassword, firebaseError, passwordReset } =
-        useContext(AuthContext);
-    const [error, setError] = useState("");
+    const displayError = useDisplayError();
+    const checkEmail = useCheckEmail();
+    const { signInWithPassword } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+    const [captchaError, setCaptchaError] = useState("");
 
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, []);
 
-    useEffect(() => {
-        if (firebaseError) {
-            setError(formatFirebaseError(firebaseError));
+    const handleLogin = (data) => {
+        // validate captcha
+        const user_captcha_value = captchaRef.current.value;
+        if (user_captcha_value === "") {
+            setCaptchaError("Please fill in the captcha");
+            captchaRef.current.focus();
+            return;
+        } else if (!validateCaptcha(user_captcha_value)) {
+            setCaptchaError("Captcha Does Not Match");
+            captchaRef.current.value = "";
+            captchaRef.current.focus();
+            return;
         }
-    }, [firebaseError]);
+        setCaptchaError(""); // validation succeeded, remove the error
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        const form = new FormData(e.currentTarget);
-        const email = form.get("email");
-        const password = form.get("password");
-        const captcha = form.get("captcha");
-        console.log({ email, password, captcha });
-        if (email === "") {
-            setError("Please fill in the email address");
-            return;
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            setError("Invalid email");
-            return;
-        } else if (password === "") {
-            setError("Please fill in the password");
-            return;
-        } else if (captcha === "") {
-            setError("Please fill in the captcha");
-            return;
-        } else if (!validateCaptcha(captcha)) {
-            setError("Captcha Does Not Match");
-            return;
-        }
-        setError("");
+        // login
+        const { email, password } = data;
         signInWithPassword(email, password)
             .then((result) => {
                 console.log(result.user);
                 if (!result.user.emailVerified) {
-                    setError("Please verify your email");
+                    checkEmail(result.user.email, "to verify your email");
                 } else {
                     location.state ? navigate(location.state) : navigate("/");
                     toast.success("Login Successful");
                 }
             })
             .catch((err) => {
-                setError(formatFirebaseError(err));
-            });
-    };
-
-    const handleForgotPass = () => {
-        const email = emailRef.current.value;
-        console.log(email);
-        if (email === "") {
-            setError("Please fill in the email address to reset your password");
-            return;
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            setError("Please enter a valid email address");
-            return;
-        }
-        setError("");
-        passwordReset(email)
-            .then(() => {
-                Swal.fire({
-                    title: "Please check your email",
-                    text: `Please check your ${email} for a link to reset your password.`,
-                    imageUrl: "https://i.ibb.co/D9Qg6M1/mail.png",
-                    imageWidth: 128,
-                    imageHeight: 128,
-                    imageAlt: "Email",
-                });
-            })
-            .catch((err) => {
-                console.log(err);
-                setError(formatFirebaseError(err));
+                displayError(err);
             });
     };
 
@@ -124,18 +91,34 @@ const Login = () => {
                         <h2 className="text-center font-bold text-4xl">
                             Login
                         </h2>
-                        <form onSubmit={handleLogin} className="card-body pb-4">
+                        <form
+                            onSubmit={handleSubmit(handleLogin)}
+                            className="card-body pb-4"
+                        >
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
                                 <input
-                                    ref={emailRef}
                                     type="text"
-                                    name="email"
+                                    {...register("email", {
+                                        required:
+                                            "Please enter your email address.",
+                                        pattern: {
+                                            value: /\S+@\S+\.\S+/,
+                                            message: "Invalid email",
+                                        },
+                                    })}
                                     placeholder="Your email"
-                                    className="input input-bordered"
+                                    className={`input input-bordered ${
+                                        errors.email && "border-red-600"
+                                    }`}
                                 />
+                                {errors.email && (
+                                    <p className="text-red-600 pt-1">
+                                        {errors.email.message}
+                                    </p>
+                                )}
                             </div>
                             <div className="form-control relative">
                                 <label className="label">
@@ -143,13 +126,17 @@ const Login = () => {
                                 </label>
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    name="password"
+                                    {...register("password", {
+                                        required: "Please fill in the password",
+                                    })}
                                     placeholder="Enter your password"
-                                    className="input input-bordered"
+                                    className={`input input-bordered ${
+                                        errors.password && "border-red-600"
+                                    }`}
                                 />
                                 <span
                                     className="cursor-pointer absolute right-4"
-                                    style={{ bottom: "14px" }}
+                                    style={{ top: "51px" }}
                                     onClick={() =>
                                         setShowPassword(!showPassword)
                                     }
@@ -160,31 +147,40 @@ const Login = () => {
                                         <IoEye className="w-5 h-5" />
                                     )}
                                 </span>
+                                {errors.password && (
+                                    <p className="text-red-600 pt-1">
+                                        {errors.password.message}
+                                    </p>
+                                )}
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <LoadCanvasTemplate />
                                 </label>
                                 <input
+                                    ref={captchaRef}
                                     type="text"
-                                    name="captcha"
                                     placeholder="Type the word above"
-                                    className="input input-bordered"
+                                    className={`input input-bordered ${
+                                        captchaError && "border-red-600"
+                                    }`}
                                 />
+                                {captchaError && (
+                                    <p className="text-red-600 pt-1">
+                                        {captchaError}
+                                    </p>
+                                )}
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn bg-[#D1A054B3] text-white hover:bg-[#d19f54ea]">
                                     Login
                                 </button>
-                                {error && (
-                                    <p className="text-red-600 pt-2">{error}</p>
-                                )}
-                                <span
-                                    onClick={handleForgotPass}
+                                <Link
+                                    to="/forgot-password"
                                     className="label-text-alt link link-hover text-sm text-center mt-4"
                                 >
                                     Forgot password?
-                                </span>
+                                </Link>
                             </div>
                         </form>
                         <div className="text-center space-y-2">

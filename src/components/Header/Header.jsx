@@ -4,9 +4,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import Headroom from "react-headroom";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
-import { Bounce, toast as toastify } from "react-toastify";
-import formatFirebaseError from "../../utils/formatFirebaseError";
 import defaultImg from "/images/icon/user.svg";
+import useDisplayError from "../../hooks/useDisplayError";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -27,6 +26,7 @@ const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef();
+    const displayError = useDisplayError();
 
     const { user, logOut } = useContext(AuthContext);
 
@@ -36,18 +36,7 @@ const Header = () => {
                 toast.success("LogOut Successful");
             })
             .catch((err) => {
-                console.error(err);
-                toastify.error(formatFirebaseError(err), {
-                    position: "top-right",
-                    autoClose: 500,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    transition: Bounce,
-                });
+                displayError(err);
             });
     };
 

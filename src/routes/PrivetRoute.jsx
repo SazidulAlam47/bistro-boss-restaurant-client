@@ -31,7 +31,7 @@ const PrivateRoute = ({ children }) => {
     }
 
     toast.warn("You must login to view this page", {
-        position: "top-right",
+        position: "top-center",
         autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,

@@ -13,8 +13,10 @@ import {
     GithubAuthProvider,
     TwitterAuthProvider,
 } from "firebase/auth";
-import Swal from "sweetalert2";
+
 import auth from "../firebase/firebase.config";
+import useDisplayError from "../hooks/useDisplayError";
+import useCheckEmail from "../hooks/useCheckEmail";
 
 export const AuthContext = createContext();
 
@@ -25,7 +27,8 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [firebaseError, setFirebaseError] = useState("");
+    const displayError = useDisplayError();
+    const checkEmail = useCheckEmail();
 
     const googleLogin = () => {
         setLoading(true);
@@ -70,31 +73,26 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log("currentUser ", currentUser);
-            setFirebaseError("");
             if (currentUser) {
                 if (!currentUser.emailVerified) {
                     sendEmailVerification(currentUser)
                         .then(() => {
-                            Swal.fire({
-                                title: "Please verify Your Email",
-                                text: `Check your ${currentUser.email} for a link to verify your email address.`,
-                                imageUrl: "https://i.ibb.co/D9Qg6M1/mail.png",
-                                imageWidth: 128,
-                                imageHeight: 128,
-                                imageAlt: "Email",
-                            });
+                            checkEmail(
+                                currentUser.email,
+                                "to verify your email"
+                            );
                             signOut(auth)
                                 .then(() => {
                                     console.log("user not verified");
                                 })
                                 .catch((err) => {
                                     console.log(err.message);
-                                    setFirebaseError(err);
+                                    displayError(err);
                                 });
                         })
                         .catch((err) => {
                             console.log(err.message);
-                            setFirebaseError(err);
+                            displayError(err);
                         });
                 } else {
                     setUser(currentUser);
@@ -108,11 +106,10 @@ const AuthProvider = ({ children }) => {
         return () => {
             unSubscribe();
         };
-    }, [user]);
+    }, [user, displayError, checkEmail]);
 
     const authInfo = {
         user,
-        firebaseError,
         loading,
         googleLogin,
         twitterLogin,
@@ -122,6 +119,7 @@ const AuthProvider = ({ children }) => {
         updateInfo,
         logOut,
         passwordReset,
+        displayError,
     };
 
     return (
