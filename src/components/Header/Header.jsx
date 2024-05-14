@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import { useContext, useEffect, useRef, useState } from "react";
 import Headroom from "react-headroom";
 import { AuthContext } from "../../providers/AuthProvider";
-import toast from "react-hot-toast";
 import defaultImg from "/images/icon/user.svg";
-import displayError from "../../utils/displayError";
 import useCarts from "../../hooks/useCarts";
 import Logo from "../Logo/Logo";
+import toast from "react-hot-toast";
+import displayError from "../../utils/displayError";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -29,7 +29,6 @@ const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef();
     const { carts, totalPrice } = useCarts();
-
     const { user, logOut } = useContext(AuthContext);
 
     const handleLogOut = () => {
@@ -203,7 +202,7 @@ const Header = () => {
                                             </span>
                                             <li>
                                                 <Link to="/dashboard/home">
-                                                    Profile
+                                                    User Dashboard
                                                 </Link>
                                             </li>
                                             <li>

@@ -1,9 +1,9 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import Logo from "../components/Logo/Logo";
 import PropTypes from "prop-types";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiFillHome } from "react-icons/ai";
-import { IoCalendar } from "react-icons/io5";
+import { IoCalendar, IoExitOutline } from "react-icons/io5";
 import { IoMdCart } from "react-icons/io";
 import { TbCreditCardPay } from "react-icons/tb";
 import { LiaCommentSolid } from "react-icons/lia";
@@ -11,6 +11,10 @@ import { LuCalendarCheck2 } from "react-icons/lu";
 import { TiThMenu } from "react-icons/ti";
 import { MdShoppingBag } from "react-icons/md";
 import { FaEnvelope } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+import toast from "react-hot-toast";
+import displayError from "../utils/displayError";
 
 const SingleNav = ({ path, children }) => {
     const closeDrawer = () => {
@@ -35,6 +39,20 @@ const SingleNav = ({ path, children }) => {
 };
 
 const Dashboard = () => {
+    const { logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogOut = () => {
+        navigate("/");
+        logOut()
+            .then(() => {
+                toast.success("LogOut Successful");
+            })
+            .catch((err) => {
+                displayError(err);
+            });
+    };
+
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -96,24 +114,44 @@ const Dashboard = () => {
 
                     <ul className="pl-6 space-y-5 font-cinzel border-t border-black lg:border-white pt-6">
                         <li>
-                            <SingleNav path="/">
+                            <Link
+                                className="text-black flex items-center gap-2 text-xl font-medium"
+                                to="/"
+                            >
                                 <AiFillHome /> Home
-                            </SingleNav>
+                            </Link>
                         </li>
                         <li>
-                            <SingleNav path="/menu">
+                            <Link
+                                className="text-black flex items-center gap-2 text-xl font-medium"
+                                to="/menu"
+                            >
                                 <TiThMenu /> Menu
-                            </SingleNav>
+                            </Link>
                         </li>
                         <li>
-                            <SingleNav path="/shop">
+                            <Link
+                                className="text-black flex items-center gap-2 text-xl font-medium"
+                                to="/shop"
+                            >
                                 <MdShoppingBag /> Shop
-                            </SingleNav>
+                            </Link>
                         </li>
                         <li>
-                            <SingleNav path="/contact">
+                            <Link
+                                className="text-black flex items-center gap-2 text-xl font-medium"
+                                to="/contact"
+                            >
                                 <FaEnvelope /> Contact
-                            </SingleNav>
+                            </Link>
+                        </li>
+                        <li>
+                            <button
+                                onClick={handleLogOut}
+                                className="text-black flex items-center gap-2 text-xl font-medium"
+                            >
+                                <IoExitOutline /> Logout
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -123,9 +161,7 @@ const Dashboard = () => {
 };
 
 SingleNav.propTypes = {
-    pageTitle: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
-    setIsMobileMenuOpen: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
 };
 
