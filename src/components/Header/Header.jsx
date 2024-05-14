@@ -6,6 +6,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 import defaultImg from "/images/icon/user.svg";
 import displayError from "../../utils/displayError";
+import useCarts from "../../hooks/useCarts";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -26,6 +27,7 @@ const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef();
+    const { carts, totalPrice } = useCarts();
 
     const { user, logOut } = useContext(AuthContext);
 
@@ -158,7 +160,7 @@ const Header = () => {
                                                     />
                                                 </svg>
                                                 <span className="badge badge-sm indicator-item">
-                                                    5
+                                                    {carts.length}
                                                 </span>
                                             </div>
                                         </div>
@@ -168,10 +170,10 @@ const Header = () => {
                                         >
                                             <div className="card-body">
                                                 <span className="font-bold text-lg">
-                                                    8 Items
+                                                    {carts.length} Items
                                                 </span>
                                                 <span className="text-info">
-                                                    Subtotal: $999
+                                                    Subtotal: ${totalPrice}
                                                 </span>
                                                 <div className="card-actions">
                                                     <button className="btn btn-primary btn-block">
@@ -189,7 +191,7 @@ const Header = () => {
                                         >
                                             <div className="w-10 rounded-full">
                                                 <img
-                                                    alt="Tailwind CSS Navbar component"
+                                                    alt={user.displayName}
                                                     src={
                                                         user.photoURL
                                                             ? user.photoURL

@@ -21,11 +21,9 @@ const Shop = () => {
             <Helmet>
                 <title>Bistro Boss | Shop</title>
             </Helmet>
-            <section>
-                <Cover img="/images/shop/banner2.jpg" heading="Shop" page>
-                    Would you like to order a dish?
-                </Cover>
-            </section>
+            <Cover img="/images/shop/banner2.jpg" heading="Shop" page>
+                Would you like to order a dish?
+            </Cover>
 
             <section className="container mx-auto px-3 md:px-6 py-12">
                 <Tabs

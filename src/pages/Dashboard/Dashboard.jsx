@@ -1,8 +1,11 @@
+import { Outlet } from "react-router-dom";
+
 const Dashboard = () => {
     return (
-        <section className="pt-32">
+        <div>
             <p>This is Dashboard</p>
-        </section>
+            <Outlet />
+        </div>
     );
 };
 

@@ -20,7 +20,9 @@ const OtherLogin = ({ location }) => {
 
         toast.success("Login Successful");
         // navigate
-        location.state ? navigate(location.state) : navigate("/");
+        if (result.user.emailVerified) {
+            location.state ? navigate(location.state) : navigate("/");
+        }
     };
 
     const handleGoogle = () => {
@@ -57,19 +59,19 @@ const OtherLogin = ({ location }) => {
         <div className="flex gap-3 justify-center">
             <button
                 onClick={handleGoogle}
-                className="border-2 border-[#444444] p-3 rounded-full"
+                className="border-2 border-[#444444] p-3 rounded-full focus:scale-95"
             >
                 <FaGoogle size={25} />
             </button>
             <button
                 onClick={handleTwitter}
-                className="border-2 border-[#444444] p-3 rounded-full"
+                className="border-2 border-[#444444] p-3 rounded-full focus:scale-95"
             >
                 <FaXTwitter size={25} />
             </button>
             <button
                 onClick={handleGithub}
-                className="border-2 border-[#444444] p-3 rounded-full"
+                className="border-2 border-[#444444] p-3 rounded-full focus:scale-95"
             >
                 <FaGithub size={25} />
             </button>

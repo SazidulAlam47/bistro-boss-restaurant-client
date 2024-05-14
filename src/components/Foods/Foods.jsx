@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import FoodSkeleton from "./FoodSkeleton";
 import FoodCard from "./FoodCard";
 import PropTypes from "prop-types";
 import ReactPaginate from "react-paginate";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import { axiosSecure } from "../../hooks/useAxiosSecure";
 
 const Foods = ({ category }) => {
     const location = useLocation();
@@ -13,13 +13,13 @@ const Foods = ({ category }) => {
     const [selectedPage, setSelectedPage] = useState(0);
 
     const { data: foods, isPending } = useQuery({
-        queryKey: [`${category}-foods-${selectedPage}-${productsPerPage}`],
+        queryKey: ["foods", category, selectedPage, productsPerPage],
         queryFn: async () => {
-            const menusRes = await axios.get(
-                `http://localhost:5000/menus?category=${category}&page=${selectedPage}&size=${productsPerPage}`
+            const menusRes = await axiosSecure.get(
+                `/menus?category=${category}&page=${selectedPage}&size=${productsPerPage}`
             );
-            const countRes = await axios.get(
-                `http://localhost:5000/menusCount?category=${category}`
+            const countRes = await axiosSecure.get(
+                `/menusCount?category=${category}`
             );
             const menus = menusRes.data;
             const count = countRes.data.count;

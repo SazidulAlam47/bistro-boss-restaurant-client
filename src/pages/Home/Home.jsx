@@ -10,7 +10,7 @@ import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
     return (
-        <div>
+        <>
             <Helmet>
                 <title>Bistro Boss</title>
             </Helmet>
@@ -22,7 +22,7 @@ const Home = () => {
             <Recommends />
             <DiscoverUs />
             <Testimonials />
-        </div>
+        </>
     );
 };
 

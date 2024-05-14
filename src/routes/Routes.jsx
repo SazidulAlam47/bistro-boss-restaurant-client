@@ -8,6 +8,7 @@ import Register from "../pages/Auth/Register";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import PrivateRoute from "./PrivetRoute";
 import ForgotPass from "../pages/Auth/ForgotPass";
+import Contact from "../pages/Contact/Contact";
 
 const router = createBrowserRouter([
     {
@@ -43,12 +44,22 @@ const router = createBrowserRouter([
                 element: <ForgotPass />,
             },
             {
+                path: "/contact",
+                element: <Contact />,
+            },
+        ],
+    },
+    {
+        path: "/dashboard",
+        element: (
+            <PrivateRoute>
+                <Dashboard />
+            </PrivateRoute>
+        ),
+        children: [
+            {
                 path: "/dashboard",
-                element: (
-                    <PrivateRoute>
-                        <Dashboard />
-                    </PrivateRoute>
-                ),
+                element: <div>Welcome</div>,
             },
         ],
     },

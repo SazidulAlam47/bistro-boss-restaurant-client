@@ -9,11 +9,9 @@ const Menu = () => {
                 <title>Bistro Boss | Menu</title>
             </Helmet>
             {/* Page Cover */}
-            <section>
-                <Cover img="/images/menu/banner3.jpg" heading="OUR MENU" page>
-                    Would you like to try a dish?
-                </Cover>
-            </section>
+            <Cover img="/images/menu/banner3.jpg" heading="Our Menu" page>
+                Would you like to try a dish?
+            </Cover>
             {/* offered section */}
             <MenuSection
                 heading="TODAY'S OFFER"

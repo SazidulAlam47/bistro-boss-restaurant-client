@@ -28,6 +28,8 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [captchaError, setCaptchaError] = useState("");
 
+    console.log(location);
+
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, []);
