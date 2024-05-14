@@ -1,14 +1,20 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home/Home";
 import Menu from "../pages/Menu/Menu";
 import Shop from "../pages/Shop/Shop";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
-import Dashboard from "../pages/Dashboard/Dashboard";
 import PrivateRoute from "./PrivetRoute";
 import ForgotPass from "../pages/Auth/ForgotPass";
 import Contact from "../pages/Contact/Contact";
+import Dashboard from "../layouts/Dashboard";
+import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
+import Cart from "../pages/Dashboard/Cart/Cart";
+import Reservation from "../pages/Dashboard/Reservation/Reservation";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
+import AddReview from "../pages/Dashboard/AddReview/AddReview";
+import MyBooking from "../pages/Dashboard/MyBooking/MyBooking";
 
 const router = createBrowserRouter([
     {
@@ -16,35 +22,35 @@ const router = createBrowserRouter([
         element: <MainLayout />,
         children: [
             {
-                path: "/",
+                path: "",
                 element: <Home />,
             },
             {
-                path: "/menu",
+                path: "menu",
                 element: <Menu />,
             },
             {
-                path: "/shop/",
+                path: "shop/",
                 element: <Shop />,
             },
             {
-                path: "/shop/:category",
+                path: "shop/:category",
                 element: <Shop />,
             },
             {
-                path: "/login",
+                path: "login",
                 element: <Login />,
             },
             {
-                path: "/register",
+                path: "register",
                 element: <Register />,
             },
             {
-                path: "/forgot-password",
+                path: "forgot-password",
                 element: <ForgotPass />,
             },
             {
-                path: "/contact",
+                path: "contact",
                 element: <Contact />,
             },
         ],
@@ -58,8 +64,32 @@ const router = createBrowserRouter([
         ),
         children: [
             {
-                path: "/dashboard",
-                element: <div>Welcome</div>,
+                path: "",
+                element: <Navigate to="/dashboard/home" />,
+            },
+            {
+                path: "home",
+                element: <DashboardHome />,
+            },
+            {
+                path: "reservation",
+                element: <Reservation />,
+            },
+            {
+                path: "payment",
+                element: <PaymentHistory />,
+            },
+            {
+                path: "cart",
+                element: <Cart />,
+            },
+            {
+                path: "review",
+                element: <AddReview />,
+            },
+            {
+                path: "booking",
+                element: <MyBooking />,
             },
         ],
     },

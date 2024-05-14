@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import defaultImg from "/images/icon/user.svg";
 import displayError from "../../utils/displayError";
 import useCarts from "../../hooks/useCarts";
+import Logo from "../Logo/Logo";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -119,17 +120,7 @@ const Header = () => {
                                 </nav>
                             )}
                         </div>
-                        <Link
-                            to="/"
-                            className="flex flex-col font-cinzel sm:text-xl"
-                        >
-                            <span className="font-bold sm:font-black">
-                                BISTRO BOSS
-                            </span>{" "}
-                            <span className="font-light sm:font-medium tracking-widest">
-                                Restaurant
-                            </span>
-                        </Link>
+                        <Logo />
                     </div>
                     <div className="w-1/2 lg:w-[70%] justify-end">
                         <nav className="hidden lg:flex gap-3 px-1">
@@ -176,9 +167,12 @@ const Header = () => {
                                                     Subtotal: ${totalPrice}
                                                 </span>
                                                 <div className="card-actions">
-                                                    <button className="btn btn-primary btn-block">
+                                                    <Link
+                                                        to="/dashboard/cart"
+                                                        className="btn btn-primary btn-block"
+                                                    >
                                                         View cart
-                                                    </button>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -204,14 +198,37 @@ const Header = () => {
                                             tabIndex={0}
                                             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black"
                                         >
+                                            <span className="font-semibold text-lg px-3 hover:bg-white">
+                                                {user.displayName}
+                                            </span>
                                             <li>
-                                                <span className="font-semibold hover:bg-white focus:bg-white">
-                                                    {user.displayName}
-                                                </span>
+                                                <Link to="/dashboard/home">
+                                                    Profile
+                                                </Link>
                                             </li>
                                             <li>
-                                                <Link to="/dashboard">
-                                                    Dashboard
+                                                <Link to="/dashboard/reservation">
+                                                    Reservation
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/dashboard/payment">
+                                                    Payment History
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/dashboard/cart">
+                                                    Cart
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/dashboard/review">
+                                                    Add Review
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/dashboard/booking">
+                                                    My Booking
                                                 </Link>
                                             </li>
                                             <li>
