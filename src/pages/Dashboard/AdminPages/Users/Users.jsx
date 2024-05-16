@@ -6,6 +6,7 @@ import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { Helmet } from "react-helmet-async";
 import { ThreeDots } from "react-loader-spinner";
 import defaultImg from "/images/icon/user.svg";
+import Swal from "sweetalert2";
 
 const Users = () => {
     const axiosSecure = useAxiosSecure();
@@ -48,15 +49,27 @@ const Users = () => {
         );
     }
 
-    const handleMakeAdmin = (id) => {
-        axiosSecure
-            .patch(`/users/admin/${id}`, { role: "admin" })
-            .then((res) => {
-                console.log(res.data);
-                if (res.data.matchedCount > 0) {
-                    refetch();
-                }
-            });
+    const handleMakeAdmin = (user) => {
+        Swal.fire({
+            title: "Make this user an admin?",
+            text: `Make ${user.email} an admin`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure
+                    .patch(`/users/admin/${user._id}`, { role: "admin" })
+                    .then((res) => {
+                        console.log(res.data);
+                        if (res.data.matchedCount > 0) {
+                            refetch();
+                        }
+                    });
+            }
+        });
     };
 
     return (
@@ -125,9 +138,7 @@ const Users = () => {
                                             <th className="w-36">
                                                 <button
                                                     onClick={() =>
-                                                        handleMakeAdmin(
-                                                            user._id
-                                                        )
+                                                        handleMakeAdmin(user)
                                                     }
                                                     className="btn text-white bg-[#d1a054] hover:bg-[#f3b962]"
                                                     disabled={
