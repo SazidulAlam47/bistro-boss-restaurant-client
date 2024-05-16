@@ -7,7 +7,7 @@ import {
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import OtherLogin from "./OtherLogin";
+import SocialLogin from "./SocialLogin";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
@@ -193,7 +193,7 @@ const Login = () => {
                             <p className="font-medium text-xl pt-3">
                                 Or sign in with
                             </p>
-                            <OtherLogin location={location} />
+                            <SocialLogin location={location} />
                         </div>
                     </div>
                 </div>

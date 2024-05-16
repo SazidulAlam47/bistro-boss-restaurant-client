@@ -5,20 +5,21 @@ import PropTypes from "prop-types";
 import ReactPaginate from "react-paginate";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { axiosSecure } from "../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Foods = ({ category }) => {
     const location = useLocation();
+    const axiosPublic = useAxiosPublic();
     const productsPerPage = 6;
     const [selectedPage, setSelectedPage] = useState(0);
 
     const { data: foods, isPending } = useQuery({
         queryKey: ["foods", category, selectedPage, productsPerPage],
         queryFn: async () => {
-            const menusRes = await axiosSecure.get(
+            const menusRes = await axiosPublic.get(
                 `/menus?category=${category}&page=${selectedPage}&size=${productsPerPage}`
             );
-            const countRes = await axiosSecure.get(
+            const countRes = await axiosPublic.get(
                 `/menusCount?category=${category}`
             );
             const menus = menusRes.data;

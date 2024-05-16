@@ -114,7 +114,7 @@ const Header = () => {
                                 </svg>
                             </div>
                             {isMobileMenuOpen && (
-                                <nav className="absolute top-fll flex flex-col gap-1 shadow-lg bg-white rounded-box px-5 py-3">
+                                <nav className="absolute w-44 top-fll flex flex-col gap-1 shadow-lg bg-white rounded-box px-5 py-3">
                                     {navLinks}
                                 </nav>
                             )}

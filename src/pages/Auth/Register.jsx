@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
-import OtherLogin from "./OtherLogin";
+import SocialLogin from "./SocialLogin";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import displayError from "../../utils/displayError";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
     const {
@@ -13,7 +14,7 @@ const Register = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-
+    const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const { createUser, updateInfo } = useContext(AuthContext);
@@ -48,8 +49,19 @@ const Register = () => {
                 };
                 updateInfo(result.user, profile)
                     .then(() => {
-                        console.log("profile updated", result.user);
-                        navigate("/login");
+                        axiosPublic
+                            .put("/users", {
+                                name,
+                                email,
+                            })
+                            .then((res) => {
+                                console.log(res.data);
+                                console.log(
+                                    "profile updated and saved in database",
+                                    result.user
+                                );
+                                navigate("/login");
+                            });
                     })
                     .catch((error) => {
                         console.error(error.message);
@@ -183,7 +195,7 @@ const Register = () => {
                             <p className="font-medium text-xl pt-3">
                                 Or sign in with
                             </p>
-                            <OtherLogin location={location} />
+                            <SocialLogin location={location} />
                         </div>
                     </div>
                 </div>

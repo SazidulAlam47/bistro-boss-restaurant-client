@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { axiosSecure } from "./useAxiosSecure";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useCarts = () => {
+    const axiosSecure = useAxiosSecure();
     const { user } = useContext(AuthContext);
     const {
         data: carts = [],

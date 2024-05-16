@@ -2,14 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 import MenuItemSkeleton from "./MenuItemSkeleton";
 import MenuItem from "./MenuItem";
-
-import { axiosSecure } from "../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const ShowMenus = ({ category }) => {
+    const axiosPublic = useAxiosPublic();
     const { data: menus, isPending } = useQuery({
         queryKey: ["menu", category],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/menus?category=${category}`);
+            const res = await axiosPublic.get(`/menus?category=${category}`);
             return res.data;
         },
     });

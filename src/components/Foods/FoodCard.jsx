@@ -3,12 +3,14 @@ import "./FoodCard.css";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import { axiosSecure } from "../../hooks/useAxiosSecure";
+
 import toast from "react-hot-toast";
 import useCarts from "../../hooks/useCarts";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const FoodCard = ({ item }) => {
     const { user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const { refetch } = useCarts();
 

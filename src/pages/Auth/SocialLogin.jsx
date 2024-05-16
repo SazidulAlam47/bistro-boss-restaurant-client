@@ -6,23 +6,30 @@ import { FaXTwitter } from "react-icons/fa6";
 import PropTypes from "prop-types";
 import toast from "react-hot-toast";
 import displayError from "../../utils/displayError";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
-const OtherLogin = ({ location }) => {
+const SocialLogin = ({ location }) => {
+    const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const { googleLogin, twitterLogin, githubLogin } = useContext(AuthContext);
 
     const successTask = (result) => {
         console.log(result.user);
+        const name = result.user.displayName;
+        const email = result.user.email;
+        const image = result.user.photoURL;
+        const user = { email, name, image };
 
-        // const email = result.user.email;
-        // const user = { email };
+        axiosPublic.put("/users", user).then((res) => {
+            console.log(res.data);
+            toast.success("Login Successful");
+            // navigate
+            if (result.user.emailVerified) {
+                location.state ? navigate(location.state) : navigate("/");
+            }
+        });
+
         // handleJWT(user);
-
-        toast.success("Login Successful");
-        // navigate
-        if (result.user.emailVerified) {
-            location.state ? navigate(location.state) : navigate("/");
-        }
     };
 
     const handleGoogle = () => {
@@ -79,8 +86,8 @@ const OtherLogin = ({ location }) => {
     );
 };
 
-OtherLogin.propTypes = {
+SocialLogin.propTypes = {
     location: PropTypes.object,
 };
 
-export default OtherLogin;
+export default SocialLogin;
