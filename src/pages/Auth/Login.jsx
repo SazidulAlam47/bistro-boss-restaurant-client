@@ -105,7 +105,7 @@ const Login = () => {
                                         required:
                                             "Please enter your email address.",
                                         pattern: {
-                                            value: /\S+@\S+\.\S+/,
+                                            value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                                             message: "Invalid email",
                                         },
                                     })}
