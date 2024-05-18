@@ -16,6 +16,7 @@ import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import AddReview from "../pages/Dashboard/AddReview/AddReview";
 import MyBooking from "../pages/Dashboard/MyBooking/MyBooking";
 import Users from "../pages/Dashboard/AdminPages/Users/Users";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -95,7 +96,11 @@ const router = createBrowserRouter([
             // admin routes
             {
                 path: "users",
-                element: <Users />,
+                element: (
+                    <AdminRoute>
+                        <Users />
+                    </AdminRoute>
+                ),
             },
         ],
     },

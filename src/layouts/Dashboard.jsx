@@ -18,7 +18,6 @@ import displayError from "../utils/displayError";
 import { ImSpoonKnife } from "react-icons/im";
 import { HiUserGroup } from "react-icons/hi";
 import useIsAdmin from "../hooks/useIsAdmin";
-import { ThreeDots } from "react-loader-spinner";
 
 const SingleNav = ({ path, children }) => {
     const closeDrawer = () => {
@@ -45,7 +44,7 @@ const SingleNav = ({ path, children }) => {
 const Dashboard = () => {
     const { logOut } = useContext(AuthContext);
     const navigate = useNavigate();
-    const { isAdmin, isPending } = useIsAdmin();
+    const { isAdmin } = useIsAdmin();
 
     const handleLogOut = () => {
         navigate("/");
@@ -57,21 +56,6 @@ const Dashboard = () => {
                 displayError(err);
             });
     };
-
-    if (isPending) {
-        <div className="min-h-screen flex justify-center items-center bg-white rounded-xl my-8">
-            <ThreeDots
-                visible={true}
-                height="80"
-                width="80"
-                color="#403F3F"
-                radius="9"
-                ariaLabel="three-dots-loading"
-                wrapperStyle={{}}
-                wrapperClass=""
-            />
-        </div>;
-    }
 
     return (
         <div className="drawer lg:drawer-open bg-[#f6f6f6]">
