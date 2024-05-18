@@ -16,6 +16,7 @@ import {
 import auth from "../firebase/firebase.config";
 import checkEmail from "../utils/checkEmail";
 import displayError from "../utils/displayError";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext();
 
@@ -26,6 +27,7 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const axiosPublic = useAxiosPublic();
 
     const googleLogin = () => {
         setLoading(true);
@@ -93,17 +95,22 @@ const AuthProvider = ({ children }) => {
                         });
                 } else {
                     setUser(currentUser);
+                    const email = currentUser.email;
+                    axiosPublic
+                        .post("/jwt", { email })
+                        .then((res) => console.log(res.data));
                     setLoading(false);
                 }
             } else {
                 setUser(null);
+                axiosPublic.get("/logout").then((res) => console.log(res.data));
                 setLoading(false);
             }
         });
         return () => {
             unSubscribe();
         };
-    }, [user]);
+    }, [user, axiosPublic]);
 
     const authInfo = {
         user,

@@ -28,8 +28,6 @@ const SocialLogin = ({ location }) => {
                 location.state ? navigate(location.state) : navigate("/");
             }
         });
-
-        // handleJWT(user);
     };
 
     const handleGoogle = () => {

@@ -166,8 +166,8 @@ const Users = () => {
                         </div>
                     </>
                 ) : (
-                    <p className="text-center font-medium text-lg">
-                        Your cart is empty.
+                    <p className="text-center font-medium text-lg text-red-400">
+                        Something Went Wrong
                     </p>
                 )}
             </div>
