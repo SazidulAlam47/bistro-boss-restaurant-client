@@ -41,16 +41,13 @@ const AddItems = () => {
             const uploadData = {
                 name: data.name,
                 category: data.category,
-                price: data.price,
+                price: parseFloat(data.price),
                 recipe: data.recipe,
                 image: imgUrl,
             };
 
             try {
-                const uploadRes = await axiosSecure.post(
-                    "http://localhost:5000/menus",
-                    uploadData
-                );
+                const uploadRes = await axiosSecure.post("/menus", uploadData);
                 console.log(uploadRes.data);
                 if (uploadRes.data.insertedId) {
                     reset();

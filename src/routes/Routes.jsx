@@ -18,6 +18,7 @@ import MyBooking from "../pages/Dashboard/MyBooking/MyBooking";
 import Users from "../pages/Dashboard/AdminPages/Users/Users";
 import AdminRoute from "./AdminRoute";
 import AddItems from "../pages/Dashboard/AdminPages/AddItems/AddItems";
+import ManageItems from "../pages/Dashboard/AdminPages/ManageItems/ManageItems";
 
 const router = createBrowserRouter([
     {
@@ -94,7 +95,7 @@ const router = createBrowserRouter([
                 path: "booking",
                 element: <MyBooking />,
             },
-            // admin routes
+            // admin only routes
             {
                 path: "users",
                 element: (
@@ -108,6 +109,14 @@ const router = createBrowserRouter([
                 element: (
                     <AdminRoute>
                         <AddItems />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "manage-items",
+                element: (
+                    <AdminRoute>
+                        <ManageItems />
                     </AdminRoute>
                 ),
             },
