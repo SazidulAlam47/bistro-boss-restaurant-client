@@ -1,0 +1,11 @@
+.upload {
+    background: transparent;
+    border-radius: 0;
+}
+
+.upload::file-selector-button {
+    background-color: #E8E8E8;
+    color: #444;
+    border: none;
+    padding: 16px 18px;
+}

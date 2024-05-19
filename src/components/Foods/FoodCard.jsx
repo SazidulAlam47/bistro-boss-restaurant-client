@@ -45,7 +45,7 @@ const FoodCard = ({ item }) => {
                 ${item.price}
             </p>
             <div className="pb-6">
-                <img src={item.image} alt={item.name} className="w-full" />
+                <img src={item.image} alt={item.name} className="w-full h-64" />
             </div>
             <h4 className="font-semibold text-2xl pb-2">{item.name}</h4>
             <p className="text-[#151515] pb-6 px-6 grow">{item.recipe}</p>

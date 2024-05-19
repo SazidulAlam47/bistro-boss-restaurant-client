@@ -62,7 +62,7 @@ const ForgotPass = () => {
                                     required:
                                         "Please enter your email address.",
                                     pattern: {
-                                        value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                                        value: /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                                         message: "Invalid email",
                                     },
                                 })}
