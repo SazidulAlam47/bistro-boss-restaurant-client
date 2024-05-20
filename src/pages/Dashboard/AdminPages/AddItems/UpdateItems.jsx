@@ -248,7 +248,7 @@ const UpdateItems = () => {
                         </button>
                     </div>
                 </form>
-                <div className="lg:mt-10">
+                <div className="mt-10">
                     <img
                         src={imgUrl}
                         alt="Update image"
