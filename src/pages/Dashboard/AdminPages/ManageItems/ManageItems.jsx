@@ -6,6 +6,8 @@ import { ThreeDots } from "react-loader-spinner";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
+import capitalize from "../../../../utils/capitalize";
 
 const ManageItems = () => {
     const axiosPublic = useAxiosPublic();
@@ -104,6 +106,7 @@ const ManageItems = () => {
                                         <th className="text-center">#</th>
                                         <th>Image</th>
                                         <th>Name</th>
+                                        <th>Category</th>
                                         <th>Price</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -123,12 +126,15 @@ const ManageItems = () => {
                                                 />
                                             </td>
                                             <td>{item.name}</td>
+                                            <td>{capitalize(item.category)}</td>
                                             <td>${item.price}</td>
-
                                             <th className="w-32">
-                                                <button className=" text-white bg-[#d1a054] hover:bg-[#f3b962] p-4 rounded-md font-medium active:scale-95 transition-all">
+                                                <Link
+                                                    to={`/dashboard/edit-item/${item._id}`}
+                                                    className="inline-block text-white bg-[#d1a054] hover:bg-[#f3b962] p-4 rounded-md font-medium active:scale-95 transition-all"
+                                                >
                                                     <FaRegEdit size={20} />
-                                                </button>
+                                                </Link>
                                             </th>
                                             <th className="w-40">
                                                 <button
