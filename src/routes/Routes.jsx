@@ -9,7 +9,7 @@ import PrivateRoute from "./PrivetRoute";
 import ForgotPass from "../pages/Auth/ForgotPass";
 import Contact from "../pages/Contact/Contact";
 import Dashboard from "../layouts/Dashboard";
-import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
+import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import Cart from "../pages/Dashboard/Cart/Cart";
 import Reservation from "../pages/Dashboard/Reservation/Reservation";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
@@ -21,6 +21,7 @@ import AddItems from "../pages/Dashboard/AdminPages/AddItems/AddItems";
 import ManageItems from "../pages/Dashboard/AdminPages/ManageItems/ManageItems";
 import UpdateItems from "../pages/Dashboard/AdminPages/AddItems/UpdateItems";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import AdminHome from "../pages/Dashboard/AdminPages/AdminHome/AdminHome";
 
 const router = createBrowserRouter([
     {
@@ -75,7 +76,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "home",
-                element: <DashboardHome />,
+                element: <UserHome />,
             },
             {
                 path: "reservation",
@@ -102,6 +103,14 @@ const router = createBrowserRouter([
                 element: <Payment />,
             },
             // admin only routes
+            {
+                path: "admin-home",
+                element: (
+                    <AdminRoute>
+                        <AdminHome />
+                    </AdminRoute>
+                ),
+            },
             {
                 path: "users",
                 element: (

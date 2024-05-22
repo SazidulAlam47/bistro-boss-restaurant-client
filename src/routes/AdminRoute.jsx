@@ -4,12 +4,12 @@ import { Navigate, useLocation } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { Bounce, toast } from "react-toastify";
 import { AuthContext } from "../providers/AuthProvider";
-import useIsAdmin from "../hooks/useIsAdmin";
+import useAdmin from "../hooks/useAdmin";
 
 const AdminRoute = ({ children }) => {
     const location = useLocation();
     const { user, loading } = useContext(AuthContext);
-    const { isAdmin, isAdminLoading } = useIsAdmin();
+    const { isAdmin, isAdminLoading } = useAdmin();
 
     if (loading || isAdminLoading) {
         return (

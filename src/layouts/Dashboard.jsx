@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 import displayError from "../utils/displayError";
 import { ImSpoonKnife } from "react-icons/im";
 import { HiUserGroup } from "react-icons/hi";
-import useIsAdmin from "../hooks/useIsAdmin";
+import useAdmin from "../hooks/useAdmin";
 
 const SingleNav = ({ path, children }) => {
     const closeDrawer = () => {
@@ -44,7 +44,7 @@ const SingleNav = ({ path, children }) => {
 const Dashboard = () => {
     const { logOut } = useContext(AuthContext);
     const navigate = useNavigate();
-    const { isAdmin } = useIsAdmin();
+    const { isAdmin } = useAdmin();
 
     const handleLogOut = () => {
         navigate("/");
@@ -87,7 +87,7 @@ const Dashboard = () => {
                         {isAdmin ? (
                             <>
                                 <li>
-                                    <SingleNav path="/dashboard/home">
+                                    <SingleNav path="/dashboard/admin-home">
                                         <AiFillHome /> Admin Home
                                     </SingleNav>
                                 </li>

@@ -8,6 +8,7 @@ import useCarts from "../../hooks/useCarts";
 import Logo from "../Logo/Logo";
 import toast from "react-hot-toast";
 import displayError from "../../utils/displayError";
+import useAdmin from "../../hooks/useAdmin";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -30,6 +31,7 @@ const Header = () => {
     const dropdownRef = useRef();
     const { carts, totalPrice } = useCarts();
     const { user, logOut } = useContext(AuthContext);
+    const { isAdmin } = useAdmin();
 
     const handleLogOut = () => {
         logOut()
@@ -200,36 +202,69 @@ const Header = () => {
                                             <span className="font-semibold text-lg px-3 hover:bg-white">
                                                 {user.displayName}
                                             </span>
-                                            <li>
-                                                <Link to="/dashboard/home">
-                                                    User Dashboard
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/dashboard/reservation">
-                                                    Reservation
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/dashboard/payment">
-                                                    Payment History
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/dashboard/cart">
-                                                    Cart
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/dashboard/review">
-                                                    Add Review
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/dashboard/booking">
-                                                    My Booking
-                                                </Link>
-                                            </li>
+                                            {user && isAdmin && (
+                                                <>
+                                                    <li>
+                                                        <Link to="/dashboard/admin-home">
+                                                            Admin Home
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/add-items">
+                                                            Add Items
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/manage-items">
+                                                            Manage Items
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/manage-bookings">
+                                                            Manage Bookings
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/users">
+                                                            All Users
+                                                        </Link>
+                                                    </li>
+                                                </>
+                                            )}
+                                            {user && !isAdmin && (
+                                                <>
+                                                    <li>
+                                                        <Link to="/dashboard/home">
+                                                            User Dashboard
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/reservation">
+                                                            Reservation
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/payment">
+                                                            Payment History
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/cart">
+                                                            Cart
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/review">
+                                                            Add Review
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/booking">
+                                                            My Booking
+                                                        </Link>
+                                                    </li>
+                                                </>
+                                            )}
                                             <li>
                                                 <button onClick={handleLogOut}>
                                                     Logout

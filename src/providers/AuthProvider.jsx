@@ -96,15 +96,17 @@ const AuthProvider = ({ children }) => {
                 } else {
                     setUser(currentUser);
                     const email = currentUser.email;
-                    axiosPublic
-                        .post("/jwt", { email })
-                        .then((res) => console.log(res.data));
-                    setLoading(false);
+                    axiosPublic.post("/jwt", { email }).then((res) => {
+                        console.log(res.data);
+                        setLoading(false);
+                    });
                 }
             } else {
                 setUser(null);
-                axiosPublic.get("/logout").then((res) => console.log(res.data));
-                setLoading(false);
+                axiosPublic.get("/logout").then((res) => {
+                    console.log(res.data);
+                    setLoading(false);
+                });
             }
         });
         return () => {

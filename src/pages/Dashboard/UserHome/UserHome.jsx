@@ -12,7 +12,7 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import defaultImg from "/images/icon/user.svg";
 import { IoCard } from "react-icons/io5";
 
-const DashboardHome = () => {
+const UserHome = () => {
     const { user } = useContext(AuthContext);
 
     return (
@@ -81,4 +81,4 @@ const DashboardHome = () => {
     );
 };
 
-export default DashboardHome;
+export default UserHome;
