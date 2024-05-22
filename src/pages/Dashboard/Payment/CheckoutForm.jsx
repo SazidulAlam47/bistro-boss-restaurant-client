@@ -79,7 +79,7 @@ const CheckoutForm = () => {
                 // save the payment to database
                 const payment = {
                     tnxId: paymentIntent.id,
-                    amount: totalPrice,
+                    price: parseFloat(totalPrice),
                     email: user.email,
                     name: user.displayName,
                     date: new Date(),
