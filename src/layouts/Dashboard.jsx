@@ -125,7 +125,7 @@ const Dashboard = () => {
                                     </SingleNav>
                                 </li>
                                 <li>
-                                    <SingleNav path="/dashboard/payment">
+                                    <SingleNav path="/dashboard/payment-history">
                                         <TbCreditCardPay /> Payment History
                                     </SingleNav>
                                 </li>

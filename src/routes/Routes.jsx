@@ -20,6 +20,7 @@ import AdminRoute from "./AdminRoute";
 import AddItems from "../pages/Dashboard/AdminPages/AddItems/AddItems";
 import ManageItems from "../pages/Dashboard/AdminPages/ManageItems/ManageItems";
 import UpdateItems from "../pages/Dashboard/AdminPages/AddItems/UpdateItems";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -81,7 +82,7 @@ const router = createBrowserRouter([
                 element: <Reservation />,
             },
             {
-                path: "payment",
+                path: "payment-history",
                 element: <PaymentHistory />,
             },
             {
@@ -95,6 +96,10 @@ const router = createBrowserRouter([
             {
                 path: "booking",
                 element: <MyBooking />,
+            },
+            {
+                path: "payment",
+                element: <Payment />,
             },
             // admin only routes
             {

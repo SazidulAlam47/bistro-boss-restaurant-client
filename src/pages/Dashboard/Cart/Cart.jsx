@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import capitalize from "../../../utils/capitalize";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const axiosSecure = useAxiosSecure();
@@ -130,9 +131,12 @@ const Cart = () => {
                             <span className="font-bold text-2xl">
                                 Total Price: ${totalPrice}
                             </span>
-                            <button className="text-white bg-[#D1A054] hover:bg-[#e9af59] px-5 py-2 rounded-md font-medium active:scale-95 transition-all ">
+                            <Link
+                                to="/dashboard/payment"
+                                className="inline-block text-white bg-[#D1A054] hover:bg-[#e9af59] px-5 py-2 rounded-md font-medium active:scale-95 transition-all"
+                            >
                                 Pay
-                            </button>
+                            </Link>
                         </div>
                         <div className="overflow-x-auto mt-6 rounded-xl">
                             <table className="table">
