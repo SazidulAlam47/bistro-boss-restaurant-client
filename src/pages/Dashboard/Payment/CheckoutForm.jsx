@@ -4,22 +4,26 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCarts from "../../../hooks/useCarts";
 import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
     const [error, setError] = useState("");
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
-    const { totalPrice } = useCarts();
+    const { totalPrice, carts, refetch } = useCarts();
     const [clientSecret, setClientSecret] = useState("");
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        axiosSecure
-            .post("/create-payment-intent", { price: totalPrice })
-            .then((res) => {
-                setClientSecret(res.data.clientSecret);
-            });
+        if (totalPrice > 0) {
+            axiosSecure
+                .post("/create-payment-intent", { price: totalPrice })
+                .then((res) => {
+                    setClientSecret(res.data.clientSecret);
+                });
+        }
     }, [axiosSecure, totalPrice]);
 
     console.log(clientSecret);
@@ -72,6 +76,23 @@ const CheckoutForm = () => {
                     title: "Order Confirmed!",
                     text: `Your transition id : ${paymentIntent.id}`,
                 });
+                // save the payment to database
+                const payment = {
+                    tnxId: paymentIntent.id,
+                    amount: totalPrice,
+                    email: user.email,
+                    name: user.displayName,
+                    date: new Date(),
+                    cartIds: carts.map((item) => item._id),
+                    menuItemIds: carts.map((item) => item.foodId),
+                    status: "pending",
+                };
+                const paymentRes = await axiosSecure.post("/payments", payment);
+                console.log(paymentRes.data);
+                if (paymentRes.data.paymentResult.insertedId) {
+                    refetch();
+                    navigate("/dashboard/payment-history");
+                }
             }
         }
     };
