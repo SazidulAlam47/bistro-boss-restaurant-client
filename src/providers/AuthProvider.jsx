@@ -73,6 +73,13 @@ const AuthProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log("currentUser ", currentUser);
             if (currentUser) {
+                setUser(currentUser);
+                const email = currentUser.email;
+                axiosPublic.post("/jwt", { email }).then((res) => {
+                    console.log(res.data);
+                    setLoading(false);
+                });
+                // verify email
                 if (!currentUser.emailVerified) {
                     sendEmailVerification(currentUser)
                         .then(() => {
@@ -80,6 +87,7 @@ const AuthProvider = ({ children }) => {
                                 currentUser.email,
                                 "to verify your email"
                             );
+
                             signOut(auth)
                                 .then(() => {
                                     console.log("user not verified");
@@ -88,18 +96,12 @@ const AuthProvider = ({ children }) => {
                                     console.log(err.message);
                                     displayError(err);
                                 });
+                            setUser(null);
                         })
                         .catch((err) => {
                             console.log(err.message);
                             displayError(err);
                         });
-                } else {
-                    setUser(currentUser);
-                    const email = currentUser.email;
-                    axiosPublic.post("/jwt", { email }).then((res) => {
-                        console.log(res.data);
-                        setLoading(false);
-                    });
                 }
             } else {
                 setUser(null);
