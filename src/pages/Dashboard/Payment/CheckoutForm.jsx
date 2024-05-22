@@ -89,7 +89,7 @@ const CheckoutForm = () => {
                 };
                 const paymentRes = await axiosSecure.post("/payments", payment);
                 console.log(paymentRes.data);
-                if (paymentRes.data.paymentResult.insertedId) {
+                if (paymentRes?.data?.paymentResult?.insertedId) {
                     refetch();
                     navigate("/dashboard/payment-history");
                 }
@@ -119,7 +119,7 @@ const CheckoutForm = () => {
                 }}
             />
             <button
-                className="inline-block text-xl text-white bg-[#D1A054] hover:bg-[#e9af59] px-5 py-2 rounded-md font-medium active:scale-95 transition-all "
+                className="btn text-xl text-white bg-[#D1A054] hover:bg-[#e9af59] px-5"
                 type="submit"
                 disabled={!stripe || !clientSecret}
             >
