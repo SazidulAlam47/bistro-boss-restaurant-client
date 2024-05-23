@@ -14,11 +14,13 @@ import {
     Pie,
     Legend,
 } from "recharts";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 
 const AdminHome = () => {
     const axiosSecure = useAxiosSecure();
+    const size = useWindowSize();
 
     const { data: status, isPending: isStatusPending } = useQuery({
         queryKey: ["admin-status"],
@@ -91,8 +93,6 @@ const AdminHome = () => {
         };
     });
 
-    console.log(pieChartData);
-
     return (
         <section className="space-y-5">
             <Helmet>
@@ -101,7 +101,7 @@ const AdminHome = () => {
             <h1 className="font-cinzel font-semibold text-3xl">
                 Hi, Welcome Back!
             </h1>
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6">
                 <div className="flex items-center gap-4 bg-gradient-to-r from-[#BB34F5] to-[#FCDBFF] justify-center py-9 text-white rounded-xl">
                     <FaCreditCard size={60} />
                     <div>
@@ -139,15 +139,21 @@ const AdminHome = () => {
                     </div>
                 </div>
             </div>
-            <div className="flex gap-3 bg-white rounded-lg p-5">
-                <div className="mx-auto">
+            <div className="flex flex-col xl:flex-row gap-3 bg-white rounded-lg p-5">
+                <div className="sm:mx-auto">
                     <h2 className="text-center text-xl font-semibold">
                         <span className="border-b-2 pb-1 border-[#444]">
                             Sold Quantity
                         </span>
                     </h2>
                     <BarChart
-                        width={500}
+                        width={
+                            size.width < 1406
+                                ? size.width < 521
+                                    ? 300
+                                    : 400
+                                : 500
+                        }
                         height={300}
                         data={orders}
                         margin={{
@@ -181,7 +187,16 @@ const AdminHome = () => {
                             Total Revenue
                         </span>
                     </h2>
-                    <PieChart width={400} height={300}>
+                    <PieChart
+                        width={
+                            size.width < 1406
+                                ? size.width < 521
+                                    ? 300
+                                    : 400
+                                : 500
+                        }
+                        height={300}
+                    >
                         <Pie
                             data={pieChartData}
                             cx="50%"
