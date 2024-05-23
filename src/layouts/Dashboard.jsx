@@ -3,14 +3,12 @@ import Logo from "../components/Logo/Logo";
 import PropTypes from "prop-types";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiFillHome } from "react-icons/ai";
-import { IoCalendar, IoExitOutline } from "react-icons/io5";
+import { IoExitOutline } from "react-icons/io5";
 import { IoMdCart } from "react-icons/io";
 import { TbCreditCardPay } from "react-icons/tb";
-import { LiaCommentSolid } from "react-icons/lia";
-import { LuCalendarCheck2 } from "react-icons/lu";
 import { TiThMenu } from "react-icons/ti";
-import { MdShoppingBag } from "react-icons/md";
-import { FaBook, FaEnvelope, FaList } from "react-icons/fa";
+import { MdFastfood, MdShoppingBag } from "react-icons/md";
+import { FaEnvelope, FaList } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
@@ -98,12 +96,12 @@ const Dashboard = () => {
                                 </li>
                                 <li>
                                     <SingleNav path="/dashboard/manage-items">
-                                        <FaList /> Manage Items
+                                        <MdFastfood /> Manage Items
                                     </SingleNav>
                                 </li>
                                 <li>
-                                    <SingleNav path="/dashboard/manage-bookings">
-                                        <FaBook /> Manage Bookings
+                                    <SingleNav path="/dashboard/manage-orders">
+                                        <FaList /> Manage Orders
                                     </SingleNav>
                                 </li>
                                 <li>
@@ -120,28 +118,13 @@ const Dashboard = () => {
                                     </SingleNav>
                                 </li>
                                 <li>
-                                    <SingleNav path="/dashboard/reservation">
-                                        <IoCalendar /> Reservation
-                                    </SingleNav>
-                                </li>
-                                <li>
-                                    <SingleNav path="/dashboard/payment-history">
-                                        <TbCreditCardPay /> Payment History
-                                    </SingleNav>
-                                </li>
-                                <li>
                                     <SingleNav path="/dashboard/cart">
                                         <IoMdCart /> Cart
                                     </SingleNav>
                                 </li>
                                 <li>
-                                    <SingleNav path="/dashboard/review">
-                                        <LiaCommentSolid /> Add Review
-                                    </SingleNav>
-                                </li>
-                                <li>
-                                    <SingleNav path="/dashboard/booking">
-                                        <LuCalendarCheck2 /> My Booking
+                                    <SingleNav path="/dashboard/payment-history">
+                                        <TbCreditCardPay /> Order History
                                     </SingleNav>
                                 </li>
                             </>

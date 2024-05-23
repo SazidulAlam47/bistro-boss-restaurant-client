@@ -1,22 +1,19 @@
 import { Helmet } from "react-helmet-async";
-import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { AuthContext } from "../../../providers/AuthProvider";
-import { useContext } from "react";
+import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { ThreeDots } from "react-loader-spinner";
-import moment from "moment/moment";
+import moment from "moment";
 import { Link } from "react-router-dom";
-import capitalize from "../../../utils/capitalize";
+import capitalize from "../../../../utils/capitalize";
 
-const PaymentHistory = () => {
+const ManageOrders = () => {
     const axiosSecure = useAxiosSecure();
-    const { user } = useContext(AuthContext);
 
-    const { data: payments, isPending } = useQuery({
-        queryKey: ["payment-history", user.email],
+    const { data: orders, isPending } = useQuery({
+        queryKey: ["manage-orders"],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/payments/email/${user.email}`);
+            const res = await axiosSecure.get(`/payments`);
             return res.data;
         },
     });
@@ -25,11 +22,11 @@ const PaymentHistory = () => {
         return (
             <>
                 <Helmet>
-                    <title>Bistro Boss | Order History</title>
+                    <title>Bistro Boss | Manage Orders</title>
                 </Helmet>
                 <SectionTitle
-                    subHeading="At a Glance!"
-                    heading="Order HISTORY"
+                    subHeading="Deliver it now"
+                    heading="Manage Orders"
                 />
                 <div className="min-h-[60vh] flex justify-center items-center bg-white rounded-xl my-8">
                     <ThreeDots
@@ -50,12 +47,12 @@ const PaymentHistory = () => {
     return (
         <>
             <Helmet>
-                <title>Bistro Boss | Order History</title>
+                <title>Bistro Boss | Manage Orders</title>
             </Helmet>
-            <SectionTitle subHeading="At a Glance!" heading="Order HISTORY" />
+            <SectionTitle subHeading="Deliver it now" heading="Manage Orders" />
             <div className="bg-white px-3 lg:px-10 py-10 my-8 rounded-lg space-y-6">
                 <p className="font-bold text-2xl">
-                    Total Payments: {payments.length}
+                    Total Orders: {orders.length}
                 </p>
 
                 <div className="overflow-x-auto rounded-xl">
@@ -63,7 +60,8 @@ const PaymentHistory = () => {
                         <thead className="bg-[#D1A054] text-white font-semibold text-base">
                             <tr className="uppercase">
                                 <th>#</th>
-                                <th>Transaction ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
                                 <th>TOTAL PRICE</th>
                                 <th>Status</th>
                                 <th>PAYMENT DATE</th>
@@ -71,10 +69,11 @@ const PaymentHistory = () => {
                             </tr>
                         </thead>
                         <tbody className=" text-[#737373] text-base">
-                            {payments.map((payment, idx) => (
+                            {orders.map((payment, idx) => (
                                 <tr key={payment._id}>
                                     <td>{idx + 1}</td>
-                                    <td>{payment.tnxId}</td>
+                                    <td>{payment.name}</td>
+                                    <td>{payment.email}</td>
                                     <td>${payment.price}</td>
                                     <td>{capitalize(payment.status)}</td>
                                     <td>
@@ -82,6 +81,7 @@ const PaymentHistory = () => {
                                             "D MMMM  YYYY, h:mm:ss a"
                                         )}
                                     </td>
+
                                     <td>
                                         <Link
                                             to={`/dashboard/order-details/${payment._id}`}
@@ -100,4 +100,4 @@ const PaymentHistory = () => {
     );
 };
 
-export default PaymentHistory;
+export default ManageOrders;

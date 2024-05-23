@@ -1,51 +1,31 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
-import {
-    FaCalendarDays,
-    FaCartShopping,
-    FaCreditCard,
-    FaPhoneVolume,
-    FaShop,
-    FaStar,
-} from "react-icons/fa6";
+import { FaCartShopping } from "react-icons/fa6";
 import { AuthContext } from "../../../providers/AuthProvider";
 import defaultImg from "/images/icon/user.svg";
-import { IoCard } from "react-icons/io5";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const UserHome = () => {
     const { user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
+
+    const { data: orders = [] } = useQuery({
+        queryKey: ["order-count"],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/payments/email/${user.email}`);
+            return res.data;
+        },
+    });
 
     return (
-        <section className="space-y-5">
+        <section className="space-y-12 mt-3">
             <Helmet>
                 <title>Bistro Boss | Dashboard</title>
             </Helmet>
             <h1 className="font-cinzel font-semibold text-3xl">
                 Hi, Welcome Back!
             </h1>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="flex items-center gap-4 bg-gradient-to-r from-[#BB34F5] to-[#FCDBFF] justify-center py-9 text-white rounded-xl">
-                    <FaCreditCard size={60} />
-                    <div>
-                        <p className="font-extrabold text-4xl">205</p>
-                        <p className="text-2xl">Menu</p>
-                    </div>
-                </div>
-                <div className="flex items-center gap-4 bg-gradient-to-r from-[#D3A256] to-[#FDE8C0] justify-center py-9 text-white rounded-xl">
-                    <FaShop size={60} />
-                    <div>
-                        <p className="font-extrabold text-4xl">103</p>
-                        <p className="text-2xl">Shop</p>
-                    </div>
-                </div>
-                <div className="flex items-center gap-4 bg-gradient-to-r from-[#FE4880] to-[#FECDE9] justify-center py-9 text-white rounded-xl">
-                    <FaPhoneVolume size={60} />
-                    <div>
-                        <p className="font-extrabold text-4xl">03</p>
-                        <p className="text-2xl">Contact</p>
-                    </div>
-                </div>
-            </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[50vh] rounded-xl overflow-hidden">
                 <div className="bg-[#FFEDD5] border-b-2 lg:border-b-0 lg:border-r-2 border-[#d1a054] flex flex-col gap-4 items-center justify-center py-10">
                     <img
@@ -62,17 +42,8 @@ const UserHome = () => {
                         Your Activities
                     </h3>
                     <div className="space-y-1">
-                        <p className="text-[#0088FE] font-cinzel font-medium text-xl flex items-center gap-1">
-                            <FaCartShopping /> Orders: 6
-                        </p>
-                        <p className="text-[#00C4A1] font-cinzel font-medium text-xl flex items-center gap-1">
-                            <FaStar /> Reviews: 2
-                        </p>
-                        <p className="text-[#FFBB28] font-cinzel font-medium text-xl flex items-center gap-1">
-                            <FaCalendarDays /> Bookings: 1
-                        </p>
-                        <p className="text-[#FF8042] font-cinzel font-medium text-xl flex items-center gap-1">
-                            <IoCard /> Payment:3
+                        <p className="text-[#0088FE] font-cinzel font-medium text-2xl flex items-center gap-1">
+                            <FaCartShopping /> Orders: {orders.length}
                         </p>
                     </div>
                 </div>

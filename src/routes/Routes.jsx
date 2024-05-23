@@ -11,10 +11,7 @@ import Contact from "../pages/Contact/Contact";
 import Dashboard from "../layouts/Dashboard";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import Cart from "../pages/Dashboard/Cart/Cart";
-import Reservation from "../pages/Dashboard/Reservation/Reservation";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
-import AddReview from "../pages/Dashboard/AddReview/AddReview";
-import MyBooking from "../pages/Dashboard/MyBooking/MyBooking";
 import Users from "../pages/Dashboard/AdminPages/Users/Users";
 import AdminRoute from "./AdminRoute";
 import AddItems from "../pages/Dashboard/AdminPages/AddItems/AddItems";
@@ -22,6 +19,8 @@ import ManageItems from "../pages/Dashboard/AdminPages/ManageItems/ManageItems";
 import UpdateItems from "../pages/Dashboard/AdminPages/AddItems/UpdateItems";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import AdminHome from "../pages/Dashboard/AdminPages/AdminHome/AdminHome";
+import ManageOrders from "../pages/Dashboard/AdminPages/ManageOrders/ManageOrders";
+import OrderDetails from "../pages/Dashboard/AdminPages/OrderDetails/OrderDetails";
 
 const router = createBrowserRouter([
     {
@@ -78,10 +77,7 @@ const router = createBrowserRouter([
                 path: "home",
                 element: <UserHome />,
             },
-            {
-                path: "reservation",
-                element: <Reservation />,
-            },
+
             {
                 path: "payment-history",
                 element: <PaymentHistory />,
@@ -91,16 +87,12 @@ const router = createBrowserRouter([
                 element: <Cart />,
             },
             {
-                path: "review",
-                element: <AddReview />,
-            },
-            {
-                path: "booking",
-                element: <MyBooking />,
-            },
-            {
                 path: "payment",
                 element: <Payment />,
+            },
+            {
+                path: "order-details/:id",
+                element: <OrderDetails />,
             },
             // admin only routes
             {
@@ -140,6 +132,14 @@ const router = createBrowserRouter([
                 element: (
                     <AdminRoute>
                         <UpdateItems />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "manage-orders",
+                element: (
+                    <AdminRoute>
+                        <ManageOrders />
                     </AdminRoute>
                 ),
             },
