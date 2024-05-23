@@ -7,6 +7,7 @@ import { BsCurrencyDollar } from "react-icons/bs";
 import axios from "axios";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AddItems = () => {
     const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
@@ -76,6 +77,9 @@ const AddItems = () => {
     };
     return (
         <section className="container mx-auto px-3 md:px-6 py-12 space-y-10">
+            <Helmet>
+                <title>Bistro Boss | Add Item</title>
+            </Helmet>
             <SectionTitle heading="ADD AN ITEM" subHeading="What's new?" />
             <form
                 onSubmit={handleSubmit(onSubmit)}
