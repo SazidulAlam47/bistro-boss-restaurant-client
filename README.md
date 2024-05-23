@@ -1,8 +1,34 @@
-# React + Vite
+# Bistro Boss Restaurant Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the front-end code for the Bistro Boss Restaurant website. It is built using React and integrates with the backend to provide a seamless user experience for browsing the menu, managing cart items, and processing payments.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User authentication and authorization
+- Browse and filter menu items
+- Add and remove items from the cart
+- View order history
+- Process payments using Stripe
+- Admin dashboard for managing menu items and orders
+
+## Tech Stack
+
+- React
+- React Router
+- Axios
+- Redux (optional, for state management)
+- Stripe
+- dotenv
+
+## Admin Login
+
+To access the admin features, use the following credentials:
+
+- **Email:**
+   ```sh
+   admin@yt-google.com
+    ```
+- **Password:**
+   ```sh
+   Admin@123
+    ```
