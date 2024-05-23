@@ -220,8 +220,8 @@ const Header = () => {
                                                         </Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="/dashboard/manage-bookings">
-                                                            Manage Bookings
+                                                        <Link to="/dashboard/manage-orders">
+                                                            Manage Orders
                                                         </Link>
                                                     </li>
                                                     <li>
@@ -239,28 +239,13 @@ const Header = () => {
                                                         </Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="/dashboard/reservation">
-                                                            Reservation
+                                                        <Link to="/dashboard/cart">
+                                                            My Cart
                                                         </Link>
                                                     </li>
                                                     <li>
                                                         <Link to="/dashboard/payment">
-                                                            Payment History
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/dashboard/cart">
-                                                            Cart
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/dashboard/review">
-                                                            Add Review
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/dashboard/booking">
-                                                            My Booking
+                                                            Order History
                                                         </Link>
                                                     </li>
                                                 </>
