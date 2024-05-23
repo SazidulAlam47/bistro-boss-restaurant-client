@@ -16,9 +16,26 @@ This is the front-end code for the Bistro Boss Restaurant website. It is built u
 - React
 - React Router
 - Axios
-- Redux (optional, for state management)
+- Firebase
 - Stripe
+- TanStack React Query
 - dotenv
+- Moment.js
+- PropTypes
+- React Hook Form
+- React Hot Toast
+- React Icons
+- React Loader Spinner
+- React Loading Skeleton
+- React Paginate
+- React Parallax
+- React Responsive Carousel
+- React Simple Captcha
+- React Slick
+- React Tabs
+- React Toastify
+- Recharts
+- SweetAlert2
 
 ## Admin Login
 
