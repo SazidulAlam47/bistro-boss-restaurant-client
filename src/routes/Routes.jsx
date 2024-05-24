@@ -21,11 +21,13 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import AdminHome from "../pages/Dashboard/AdminPages/AdminHome/AdminHome";
 import ManageOrders from "../pages/Dashboard/AdminPages/ManageOrders/ManageOrders";
 import OrderDetails from "../pages/Dashboard/AdminPages/OrderDetails/OrderDetails";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "",
@@ -68,6 +70,7 @@ const router = createBrowserRouter([
                 <Dashboard />
             </PrivateRoute>
         ),
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "",
