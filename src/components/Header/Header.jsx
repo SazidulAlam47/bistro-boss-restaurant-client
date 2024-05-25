@@ -197,7 +197,7 @@ const Header = () => {
                                         </div>
                                         <ul
                                             tabIndex={0}
-                                            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black"
+                                            className="menu menu-sm dropdown-content mt-3 z-40 p-2 shadow bg-base-100 rounded-box w-52 text-black"
                                         >
                                             <span className="font-semibold text-lg px-3 hover:bg-white">
                                                 {user.displayName}
