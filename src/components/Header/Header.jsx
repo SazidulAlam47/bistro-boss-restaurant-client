@@ -88,7 +88,7 @@ const Header = () => {
 
     return (
         <Headroom>
-            <div className="bg-[#15151580] text-white z-50 w-full">
+            <div className="bg-[#15151580] text-white z-50 w-full backdrop-blur-sm">
                 <div className="container mx-auto px-3 md:px-6 navbar">
                     <div className="w-1/2 lg:w-[30%] justify-start">
                         <div className="dropdown" ref={dropdownRef}>
