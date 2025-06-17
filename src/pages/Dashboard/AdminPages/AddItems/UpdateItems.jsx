@@ -7,7 +7,7 @@ import axios from "axios";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const UpdateItems = () => {
@@ -17,6 +17,7 @@ const UpdateItems = () => {
     const [imgUrl, setImgUrl] = useState("");
     const [imgErr, setImgErr] = useState("");
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -48,7 +49,8 @@ const UpdateItems = () => {
                     showConfirmButton: false,
                     timer: 2000,
                 });
-                //navigate (optional)
+
+                navigate("/dashboard/manage-items");
             }
         });
     };

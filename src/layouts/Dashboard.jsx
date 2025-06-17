@@ -16,6 +16,7 @@ import displayError from "../utils/displayError";
 import { ImSpoonKnife } from "react-icons/im";
 import { HiUserGroup } from "react-icons/hi";
 import useAdmin from "../hooks/useAdmin";
+import { PiPicnicTableBold, PiPicnicTableFill } from "react-icons/pi";
 
 const SingleNav = ({ path, children }) => {
     const closeDrawer = () => {
@@ -97,6 +98,16 @@ const Dashboard = () => {
                                 <li>
                                     <SingleNav path="/dashboard/manage-items">
                                         <MdFastfood /> Manage Items
+                                    </SingleNav>
+                                </li>
+                                <li>
+                                    <SingleNav path="/dashboard/add-table">
+                                        <PiPicnicTableBold /> Add Table
+                                    </SingleNav>
+                                </li>
+                                <li>
+                                    <SingleNav path="/dashboard/manage-tables">
+                                        <PiPicnicTableFill /> Manage Tables
                                     </SingleNav>
                                 </li>
                                 <li>

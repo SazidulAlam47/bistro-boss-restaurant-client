@@ -220,6 +220,16 @@ const Header = () => {
                                                         </Link>
                                                     </li>
                                                     <li>
+                                                        <Link to="/dashboard/add-table">
+                                                            Add Table
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/manage-tables">
+                                                            Manage Tables
+                                                        </Link>
+                                                    </li>
+                                                    <li>
                                                         <Link to="/dashboard/manage-orders">
                                                             Manage Orders
                                                         </Link>

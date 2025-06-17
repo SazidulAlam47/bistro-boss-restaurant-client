@@ -22,6 +22,9 @@ import AdminHome from "../pages/Dashboard/AdminPages/AdminHome/AdminHome";
 import ManageOrders from "../pages/Dashboard/AdminPages/ManageOrders/ManageOrders";
 import OrderDetails from "../pages/Dashboard/AdminPages/OrderDetails/OrderDetails";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import AddTable from "../pages/Dashboard/AdminPages/AddTable/AddTable";
+import ManageTables from "../pages/Dashboard/AdminPages/ManageTables/ManageTables";
+import UpdateTable from "../pages/Dashboard/AdminPages/AddTable/UpdateTable";
 
 const router = createBrowserRouter([
     {
@@ -143,6 +146,30 @@ const router = createBrowserRouter([
                 element: (
                     <AdminRoute>
                         <ManageOrders />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "add-table",
+                element: (
+                    <AdminRoute>
+                        <AddTable />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "manage-tables",
+                element: (
+                    <AdminRoute>
+                        <ManageTables />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "edit-table/:id",
+                element: (
+                    <AdminRoute>
+                        <UpdateTable />
                     </AdminRoute>
                 ),
             },
