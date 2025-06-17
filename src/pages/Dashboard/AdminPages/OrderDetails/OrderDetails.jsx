@@ -28,7 +28,7 @@ const OrderDetails = () => {
     const { data: items, isPending: isItemsPending } = useQuery({
         queryKey: ["order-items", id],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/order-items/${id}`);
+            const res = await axiosSecure.get(`/payments/order-items/${id}`);
             return res.data;
         },
     });
@@ -63,7 +63,7 @@ const OrderDetails = () => {
 
     const handleDelivered = () => {
         axiosSecure
-            .patch(`/orders/status/${id}`, { status: "delivered" })
+            .patch(`/payments/orders/status/${id}`, { status: "completed" })
             .then((res) => {
                 console.log(res.data);
                 if (res.data.matchedCount > 0) {

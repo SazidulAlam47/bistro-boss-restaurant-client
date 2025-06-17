@@ -75,7 +75,7 @@ const AuthProvider = ({ children }) => {
             if (currentUser) {
                 setUser(currentUser);
                 const email = currentUser.email;
-                axiosPublic.post("/jwt", { email }).then((res) => {
+                axiosPublic.post("/auth/jwt", { email }).then((res) => {
                     console.log(res.data);
                     setLoading(false);
                 });
@@ -105,7 +105,7 @@ const AuthProvider = ({ children }) => {
                 }
             } else {
                 setUser(null);
-                axiosPublic.get("/logout").then((res) => {
+                axiosPublic.get("/auth/logout").then((res) => {
                     console.log(res.data);
                     setLoading(false);
                 });

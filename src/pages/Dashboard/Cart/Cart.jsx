@@ -86,7 +86,7 @@ const Cart = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/carts?email=${user.email}`).then((res) => {
+                axiosSecure.delete(`/carts/email/${user.email}`).then((res) => {
                     console.log(res.data);
                     if (res.data.deletedCount > 0) {
                         Swal.fire({

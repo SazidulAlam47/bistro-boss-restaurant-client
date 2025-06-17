@@ -72,6 +72,34 @@ const Users = () => {
         });
     };
 
+    const handleDelete = (user) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: `Delete user ${user.email}`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/users/${user._id}`).then((res) => {
+                    console.log(res.data);
+                    if (res.data.deletedCount > 0) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "User has been deleted.",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        refetch();
+                    }
+                });
+            }
+        });
+    };
+
     return (
         <>
             <Helmet>
@@ -149,7 +177,12 @@ const Users = () => {
                                                 </button>
                                             </th>
                                             <th className="w-36">
-                                                <button className="text-white bg-[#B91C1C] hover:bg-[#d33737] p-4 rounded-md font-medium active:scale-95 transition-all">
+                                                <button
+                                                    onClick={() =>
+                                                        handleDelete(user)
+                                                    }
+                                                    className="text-white bg-[#B91C1C] hover:bg-[#d33737] p-4 rounded-md font-medium active:scale-95 transition-all"
+                                                >
                                                     <FaRegTrashAlt size={20} />
                                                 </button>
                                             </th>
@@ -157,12 +190,6 @@ const Users = () => {
                                     ))}
                                 </tbody>
                             </table>
-                            <div className="text-right pr-16 py-6">
-                                <button className="btn btn-ghost inline-flex gap-2">
-                                    <FaRegTrashAlt size={20} /> Clear Shopping
-                                    Cart
-                                </button>
-                            </div>
                         </div>
                     </>
                 ) : (

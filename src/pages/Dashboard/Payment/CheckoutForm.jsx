@@ -19,7 +19,7 @@ const CheckoutForm = () => {
     useEffect(() => {
         if (totalPrice > 0) {
             axiosSecure
-                .post("/create-payment-intent", { price: totalPrice })
+                .post("/payments/create-payment-intent", { price: totalPrice })
                 .then((res) => {
                     setClientSecret(res.data.clientSecret);
                 });
@@ -89,7 +89,9 @@ const CheckoutForm = () => {
                 };
                 const paymentRes = await axiosSecure.post("/payments", payment);
                 console.log(paymentRes.data);
-                if (paymentRes?.data?.paymentResult?.insertedId) {
+                if (paymentRes?.data?.insertedId) {
+                    // Clear the cart after successful payment
+                    await axiosSecure.delete(`/carts?email=${user.email}`);
                     refetch();
                     navigate("/dashboard/payment-history");
                 }

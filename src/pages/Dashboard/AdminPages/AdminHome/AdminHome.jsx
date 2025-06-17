@@ -25,7 +25,7 @@ const AdminHome = () => {
     const { data: status, isPending: isStatusPending } = useQuery({
         queryKey: ["admin-status"],
         queryFn: async () => {
-            const res = await axiosSecure.get("/admin-status");
+            const res = await axiosSecure.get("/admin");
             return res.data;
         },
     });
@@ -33,7 +33,7 @@ const AdminHome = () => {
     const { data: orders = [] } = useQuery({
         queryKey: ["admin-order-status"],
         queryFn: async () => {
-            const res = await axiosSecure.get("/admin-order-status");
+            const res = await axiosSecure.get("/admin/order-status");
             return res.data;
         },
     });

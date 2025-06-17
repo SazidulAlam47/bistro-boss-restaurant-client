@@ -20,7 +20,7 @@ const Foods = ({ category }) => {
                 `/menus?category=${category}&page=${selectedPage}&size=${productsPerPage}`
             );
             const countRes = await axiosPublic.get(
-                `/menusCount?category=${category}`
+                `/menus/count?category=${category}`
             );
             const menus = menusRes.data;
             const count = countRes.data.count;
