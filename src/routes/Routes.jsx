@@ -26,6 +26,8 @@ import AddTable from "../pages/Dashboard/AdminPages/AddTable/AddTable";
 import ManageTables from "../pages/Dashboard/AdminPages/ManageTables/ManageTables";
 import UpdateTable from "../pages/Dashboard/AdminPages/AddTable/UpdateTable";
 import BookTable from "../pages/Dashboard/BookTable/BookTable";
+import MyBookedTables from "../pages/Dashboard/MyBookedTables/MyBookedTables";
+import ManageBookedTables from "../pages/Dashboard/AdminPages/ManageBookedTables/ManageBookedTables";
 
 const router = createBrowserRouter([
     {
@@ -105,6 +107,18 @@ const router = createBrowserRouter([
                 path: "book-table",
                 element: <BookTable />,
             },
+            {
+                path: "book-table",
+                element: <BookTable />,
+            },
+            {
+                path: "booked-tables",
+                element: <MyBookedTables />,
+            },
+            {
+                path: "book-table",
+                element: <BookTable />,
+            },
             // admin only routes
             {
                 path: "admin-home",
@@ -167,6 +181,14 @@ const router = createBrowserRouter([
                 element: (
                     <AdminRoute>
                         <ManageTables />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "manage-booked-tables",
+                element: (
+                    <AdminRoute>
+                        <ManageBookedTables />
                     </AdminRoute>
                 ),
             },

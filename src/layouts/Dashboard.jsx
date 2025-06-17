@@ -16,7 +16,11 @@ import displayError from "../utils/displayError";
 import { ImSpoonKnife } from "react-icons/im";
 import { HiUserGroup } from "react-icons/hi";
 import useAdmin from "../hooks/useAdmin";
-import { PiPicnicTableBold, PiPicnicTableFill } from "react-icons/pi";
+import {
+    PiPicnicTableBold,
+    PiPicnicTableDuotone,
+    PiPicnicTableFill,
+} from "react-icons/pi";
 
 const SingleNav = ({ path, children }) => {
     const closeDrawer = () => {
@@ -111,6 +115,11 @@ const Dashboard = () => {
                                     </SingleNav>
                                 </li>
                                 <li>
+                                    <SingleNav path="/dashboard/manage-booked-tables">
+                                        <PiPicnicTableDuotone /> Booked Tables
+                                    </SingleNav>
+                                </li>
+                                <li>
                                     <SingleNav path="/dashboard/manage-orders">
                                         <FaList /> Manage Orders
                                     </SingleNav>
@@ -141,6 +150,11 @@ const Dashboard = () => {
                                 <li>
                                     <SingleNav path="/dashboard/book-table">
                                         <PiPicnicTableBold /> Book a Table
+                                    </SingleNav>
+                                </li>
+                                <li>
+                                    <SingleNav path="/dashboard/booked-tables">
+                                        <PiPicnicTableFill /> Booked Tables
                                     </SingleNav>
                                 </li>
                             </>

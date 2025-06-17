@@ -5,12 +5,14 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 
 const BookTable = () => {
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const [tables, setTables] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     const {
         register,
@@ -60,13 +62,14 @@ const BookTable = () => {
                     showConfirmButton: false,
                     timer: 2000,
                 });
+                navigate("/dashboard/booked-tables");
             }
         } catch (error) {
             console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response.data.message || "Something went wrong!",
+                text: error.response?.data?.message || "Something went wrong!",
             });
         }
     };

@@ -230,6 +230,11 @@ const Header = () => {
                                                         </Link>
                                                     </li>
                                                     <li>
+                                                        <Link to="/dashboard/manage-booked-tables">
+                                                            Manage Booked Tables
+                                                        </Link>
+                                                    </li>
+                                                    <li>
                                                         <Link to="/dashboard/manage-orders">
                                                             Manage Orders
                                                         </Link>
@@ -261,6 +266,11 @@ const Header = () => {
                                                     <li>
                                                         <Link to="/dashboard/book-table">
                                                             Book a Table
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/booked-tables">
+                                                            Booked Tables
                                                         </Link>
                                                     </li>
                                                 </>
