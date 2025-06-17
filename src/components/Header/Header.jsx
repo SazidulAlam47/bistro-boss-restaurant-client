@@ -254,8 +254,13 @@ const Header = () => {
                                                         </Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="/dashboard/payment">
+                                                        <Link to="/dashboard/payment-history">
                                                             Order History
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/dashboard/book-table">
+                                                            Book a Table
                                                         </Link>
                                                     </li>
                                                 </>

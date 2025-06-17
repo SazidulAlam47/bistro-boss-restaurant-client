@@ -138,6 +138,11 @@ const Dashboard = () => {
                                         <TbCreditCardPay /> Order History
                                     </SingleNav>
                                 </li>
+                                <li>
+                                    <SingleNav path="/dashboard/book-table">
+                                        <PiPicnicTableBold /> Book a Table
+                                    </SingleNav>
+                                </li>
                             </>
                         )}
                     </ul>

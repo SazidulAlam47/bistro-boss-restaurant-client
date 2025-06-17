@@ -25,6 +25,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import AddTable from "../pages/Dashboard/AdminPages/AddTable/AddTable";
 import ManageTables from "../pages/Dashboard/AdminPages/ManageTables/ManageTables";
 import UpdateTable from "../pages/Dashboard/AdminPages/AddTable/UpdateTable";
+import BookTable from "../pages/Dashboard/BookTable/BookTable";
 
 const router = createBrowserRouter([
     {
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
             {
                 path: "order-details/:id",
                 element: <OrderDetails />,
+            },
+            {
+                path: "book-table",
+                element: <BookTable />,
             },
             // admin only routes
             {
